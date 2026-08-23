@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bà Táp-táp — Bài tập Tiếng Việt Lớp 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#eaf6ff;
+    --sky-deep:#cdeaff;
+    --sun:#ffc93c;
+    --sun-deep:#ffab00;
+    --coral:#ff6b6b;
+    --coral-deep:#e8523f;
+    --leaf:#3fb083;
+    --leaf-deep:#2f9270;
+    --plum:#8675a9;
+    --ink:#2d3142;
+    --ink-soft:#5a5f75;
+    --paper:#ffffff;
+    --paper-line:#e7edf5;
+    --radius:22px;
+    --shadow: 0 10px 26px rgba(45,49,66,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Quicksand',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 12% 8%, #fff6da 0%, transparent 45%),
+      radial-gradient(circle at 90% 4%, #ffe1e1 0%, transparent 40%),
+      linear-gradient(180deg, var(--sky) 0%, #f5fbff 60%, #fdf9ef 100%);
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  h1,h2,h3,.display{font-family:'Baloo 2',sans-serif;}
+
+  /* ---------- Header / hero ---------- */
+  .hero{
+    position:relative;
+    padding:38px 18px 30px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero-badge{
+    display:inline-block;
+    background:var(--paper);
+    border:2px dashed var(--sun-deep);
+    color:var(--coral-deep);
+    font-weight:700;
+    font-size:14px;
+    padding:6px 16px;
+    border-radius:999px;
+    margin-bottom:14px;
+    letter-spacing:.5px;
+  }
+  .hero h1{
+    font-size:clamp(28px,6vw,44px);
+    margin:0 0 8px;
+    color:var(--ink);
+    line-height:1.15;
+  }
+  .hero h1 span{color:var(--coral-deep);}
+  .hero p.sub{
+    max-width:520px;
+    margin:0 auto;
+    color:var(--ink-soft);
+    font-weight:600;
+    font-size:16px;
+  }
+  .path-icons{display:flex;justify-content:center;gap:10px;margin-top:18px;}
+  .path-icons svg{width:34px;height:34px;}
+
+  /* ---------- Name card ---------- */
+  .name-card{
+    max-width:400px;margin:22px auto 0;
+    background:var(--paper);border-radius:18px;box-shadow:var(--shadow);
+    padding:16px 20px;border:2px solid #ffe2a8;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .name-card label{font-weight:700;font-size:14px;color:var(--plum);display:flex;align-items:center;gap:6px;}
+  .name-card input{
+    border:2px solid #eaeff6;border-radius:12px;padding:10px 12px;
+    font-family:'Quicksand',sans-serif;font-weight:700;font-size:16px;color:var(--ink);
+  }
+  .name-card input:focus{outline:none;border-color:var(--sun-deep);}
+
+  /* ---------- Fog progress bar (signature element) ---------- */
+  .progress-wrap{
+    max-width:640px;
+    margin:26px auto 0;
+    padding:0 18px;
+  }
+  .progress-label{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:8px;
+  }
+  #progress-count{color:var(--coral-deep);font-size:16px;}
+  .progress-track{
+    position:relative;
+    height:34px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#dfe9f2,#eef3f8);
+    border:2px solid #d9e3ee;
+    overflow:hidden;
+    box-shadow: inset 0 2px 5px rgba(45,49,66,0.08);
+  }
+  .progress-fill{
+    position:absolute;left:0;top:0;bottom:0;
+    width:0%;
+    background:linear-gradient(90deg, var(--sun) 0%, var(--coral) 100%);
+    border-radius:999px;
+    transition:width .5s cubic-bezier(.4,1.4,.6,1);
+  }
+  .progress-walker{
+    position:absolute;top:50%;
+    transform:translate(-50%,-50%);
+    left:0%;
+    font-size:20px;
+    transition:left .5s cubic-bezier(.4,1.4,.6,1);
+    filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));
+  }
+
+  /* ---------- Container ---------- */
+  .wrap{max-width:640px;margin:32px auto 0;padding:0 18px;display:flex;flex-direction:column;gap:22px;}
+
+  /* ---------- Story card ---------- */
+  .story-card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:26px 24px;
+    position:relative;
+    border-top:6px solid var(--plum);
+  }
+  .story-card h2{
+    margin:0 0 4px;
+    font-size:22px;
+    color:var(--plum);
+    display:flex;align-items:center;gap:8px;
+  }
+  .story-card .story-meta{
+    font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:14px;
+  }
+  .story-card p{
+    line-height:1.75;
+    font-size:15.5px;
+    margin:0 0 12px;
+    color:#3a3f52;
+  }
+  .story-card p:first-of-type::first-letter{
+    font-family:'Baloo 2',sans-serif;
+    font-size:44px;
+    color:var(--coral-deep);
+    float:left;
+    line-height:0.8;
+    padding-right:8px;
+    padding-top:4px;
+  }
+  details.story-toggle summary{
+    cursor:pointer;font-weight:700;color:var(--plum);list-style:none;
+    display:flex;align-items:center;gap:6px;font-size:15px;
+  }
+  details.story-toggle summary::-webkit-details-marker{display:none;}
+  details.story-toggle summary .chev{transition:transform .25s;}
+  details.story-toggle[open] summary .chev{transform:rotate(90deg);}
+
+  /* ---------- Question card ---------- */
+  .q-card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px 22px 24px;
+    border:2px solid transparent;
+    transition:border-color .25s, transform .2s;
+    scroll-margin-top:20px;
+  }
+  .q-card.answered{border-color:#ffe2a8;}
+  .q-card.correct{border-color:var(--leaf) !important;background:#f2fbf7;}
+  .q-card.incorrect{border-color:var(--coral) !important;background:#fff4f3;}
+
+  .q-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+  .q-num{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--sun);color:#7a4b00;font-family:'Baloo 2',sans-serif;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;
+    flex:none;
+  }
+  .q-tag{
+    font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;
+    background:#eef1fb;color:var(--plum);letter-spacing:.3px;
+  }
+  .q-tag.tag-fill{background:#fff0e0;color:#b5610a;}
+  .q-tag.tag-match{background:#e4f7ee;color:var(--leaf-deep);}
+  .q-text{font-weight:700;font-size:16px;margin:0 0 14px;color:var(--ink);line-height:1.5;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    display:flex;align-items:center;gap:12px;
+    padding:12px 14px;border-radius:14px;
+    background:#f7f9fc;border:2px solid #eaeff6;
+    cursor:pointer;transition:all .15s;font-weight:600;font-size:15px;
+  }
+  .opt:hover{background:#eef4ff;border-color:#c9dcff;}
+  .opt input{accent-color:var(--coral);width:18px;height:18px;flex:none;}
+  .opt.picked{background:#fff2d6;border-color:var(--sun-deep);}
+  .q-card.correct .opt.picked{background:#dcf5e9;border-color:var(--leaf);}
+  .q-card.incorrect .opt.picked{background:#ffe1de;border-color:var(--coral);}
+  .q-card.incorrect .opt.correct-answer{background:#dcf5e9;border-color:var(--leaf);}
+
+  .match-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .match-left{
+    background:#f7f9fc;border:2px solid #eaeff6;border-radius:12px;
+    padding:9px 12px;font-weight:700;min-width:150px;flex:1;
+  }
+  .match-row select{
+    flex:1;min-width:160px;padding:9px 10px;border-radius:12px;
+    border:2px solid #eaeff6;background:#fff;font-family:'Quicksand',sans-serif;
+    font-weight:600;font-size:14.5px;color:var(--ink);
+  }
+  .match-row select:focus{outline:2px solid var(--sun-deep);}
+
+  .fill-line{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px;line-height:1.9;}
+  .fill-line .txt{font-weight:600;font-size:15px;}
+  .fill-line input[type=text]{
+    border:none;border-bottom:3px dotted #b9c3d4;
+    background:transparent;font-family:'Quicksand',sans-serif;
+    font-weight:700;font-size:15px;color:var(--coral-deep);
+    padding:4px 6px;min-width:120px;text-align:center;
+  }
+  .fill-line input[type=text]:focus{outline:none;border-bottom-color:var(--sun-deep);}
+  .word-bank{
+    margin-top:6px;background:#fffaf0;border:2px dashed #ffdb9b;border-radius:14px;
+    padding:10px 14px;font-size:13.5px;color:#8a5a00;font-weight:600;
+  }
+
+  .feedback{
+    margin-top:14px;padding:12px 14px;border-radius:14px;font-size:14px;font-weight:600;
+    display:none;line-height:1.6;
+  }
+  .q-card.correct .feedback{display:block;background:#e4f7ee;color:#1d7a52;}
+  .q-card.incorrect .feedback{display:block;background:#ffe9e6;color:#b3392a;}
+
+  /* ---------- Submit bar ---------- */
+  .submit-zone{
+    position:sticky;bottom:14px;
+    display:flex;justify-content:center;margin-top:6px;z-index:20;
+  }
+  .btn-submit{
+    background:linear-gradient(135deg,var(--coral),var(--coral-deep));
+    color:#fff;border:none;padding:16px 38px;border-radius:999px;
+    font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:700;
+    box-shadow:0 10px 22px rgba(232,82,63,.35);cursor:pointer;
+    transition:transform .15s;
+  }
+  .btn-submit:hover{transform:translateY(-2px) scale(1.02);}
+  .btn-submit:active{transform:translateY(0) scale(.98);}
+  .btn-submit:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+
+  /* ---------- Result panel ---------- */
+  .result-panel{
+    background:linear-gradient(160deg,#fff,#fef8ee);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:30px 24px;text-align:center;border-top:6px solid var(--leaf);
+    display:none;
+  }
+  .result-panel.show{display:block;animation:pop .5s;}
+  @keyframes pop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .result-emoji{font-size:52px;margin-bottom:6px;}
+  .result-score{font-family:'Baloo 2',sans-serif;font-size:46px;color:var(--coral-deep);margin:4px 0;}
+  .result-msg{font-weight:700;font-size:17px;color:var(--ink);margin-bottom:16px;}
+  .btn-retry{
+    background:var(--plum);color:#fff;border:none;padding:12px 28px;border-radius:999px;
+    font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:700;cursor:pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;}
+  }
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:28px;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-badge">TIẾNG VIỆT · LỚP 4 · TUẦN 2</span>
+  <h1>Bài đọc hiểu: <span>Bà Táp-táp</span></h1>
+  <p class="sub">Đọc câu chuyện, rồi trả lời các câu hỏi bên dưới nhé. Mỗi câu con làm đúng, sương mù sẽ tan dần trên con đường phía trước!</p>
+  <div class="path-icons" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#fff3d6" stroke="#ffab00" stroke-width="1.5"/><path d="M8 13c1 1.2 2.2 1.8 4 1.8s3-.6 4-1.8" stroke="#e8523f" stroke-width="1.6" stroke-linecap="round"/><circle cx="9" cy="10" r="1.1" fill="#2d3142"/><circle cx="15" cy="10" r="1.1" fill="#2d3142"/></svg>
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 18c3-1 4-6 6-10M20 18c-3-1-4-6-6-10" stroke="#8675a9" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="6.5" r="1.4" fill="#8675a9"/><circle cx="16" cy="6.5" r="1.4" fill="#8675a9"/></svg>
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v13M12 16l-2.5 2.5M12 16l2.5 2.5" stroke="#3fb083" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="20" r="1.3" fill="#3fb083"/></svg>
+  </div>
+</div>
+
+<div class="name-card">
+  <label for="studentName">✏️ Họ và tên của con là gì?</label>
+  <input type="text" id="studentName" placeholder="Nhập họ và tên của em...">
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Đường đi của em</span><span id="progress-count">0 / 9 câu</span></div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-walker" id="progress-walker">🚶</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- STORY -->
+  <div class="story-card">
+    <h2>📖 Bà Táp-táp</h2>
+    <div class="story-meta">(Theo E-ri Bô-rơ-rơ — Hương Trà dịch)</div>
+    <p>Mọi người gọi bà là bà Tập-tập bởi vì mỗi khi bước đi một bước, bà lại gõ nhẹ "táp, táp" trên đất. Bà bị mù, phải dùng gậy để dò đường. Bà không thể qua đường một mình và thường đứng đợi người giúp. A-lanh là cậu bé giúp bà nhiều nhất. Đi học về, thấy bà chờ, cậu chạy vội đến cẩn thận giúp bà qua đường.</p>
+    <details class="story-toggle">
+      <summary><span class="chev">▶</span> Đọc tiếp câu chuyện</summary>
+      <p>Chuyện cứ như thế tiếp diễn hằng ngày.</p>
+      <p>Vào một chiều sương mù dày đặc, A-lanh hầu như không nhìn thấy gì xa hơn nửa bước và không thể về nhà. Bỗng cậu nghe tiếng "tập, tập, tập, tập".</p>
+      <p>— Bà ơi, bà cũng bị lạc đường ạ? — A-lanh hỏi.</p>
+      <p>— Tại sao bà lại bị lạc đường? — Bà Tập-tập ngạc nhiên.</p>
+      <p>— Hôm nay có sương mù, trời tối quá ạ.</p>
+      <p>— Cậu bé ạ, có sương mù hay không, đối với bà cũng như nhau cả thôi. Bà biết đường đi, cũng giống như lúc trời sáng.</p>
+      <p>Thế rồi A-lanh bước đi cạnh bà. Bà bước không do dự cùng tiếng gậy gõ xuống mặt đường. Lát sau, hai bà cháu đã về đến nhà.</p>
+      <p>Chia tay, bà mỉm cười, nói: — Ngày mai, nếu trời đẹp, cháu lại giúp bà qua đường nhé!</p>
+      <p>— Vâng ạ! — A-lanh đáp — Cháu sẽ là mắt của bà khi trời đẹp, nhưng bà sẽ chỉ đường cho cháu lúc trời có sương mù.</p>
+    </details>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" data-qid="q1">
+    <div class="q-top"><div class="q-num">1</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Tại sao mọi người lại gọi bà là bà Táp-táp?</p>
+    <div class="options" data-type="mc" data-correct="a">
+      <label class="opt"><input type="radio" name="q1" value="a"> Vì bà bị mù, phải dùng gậy gõ nhẹ "táp, táp" trên đất để dò đường.</label>
+      <label class="opt"><input type="radio" name="q1" value="b"> Vì bà bị đau chân, khi chống gậy phát ra tiếng kêu "táp, táp".</label>
+      <label class="opt"><input type="radio" name="q1" value="c"> Vì bà có một chiếc gậy dò đường tên là Táp-táp.</label>
+    </div>
+    <div class="feedback" data-explain="Trong bài, bà bị mù nên phải dùng gậy dò đường, mỗi bước gậy gõ 'táp, táp' — vì vậy mọi người gọi bà như thế."></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" data-qid="q2">
+    <div class="q-top"><div class="q-num">2</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Hằng ngày, A-lanh thường làm gì giúp bà Táp-táp?</p>
+    <div class="options" data-type="mc" data-correct="b">
+      <label class="opt"><input type="radio" name="q2" value="a"> Làm việc nhà giúp bà Táp-táp.</label>
+      <label class="opt"><input type="radio" name="q2" value="b"> Dắt bà Táp-táp qua đường.</label>
+      <label class="opt"><input type="radio" name="q2" value="c"> Dắt bà Táp-táp đi dạo mỗi buổi chiều.</label>
+    </div>
+    <div class="feedback" data-explain="Bài đọc nói A-lanh 'chạy vội đến cẩn thận giúp bà qua đường' mỗi khi đi học về."></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" data-qid="q3">
+    <div class="q-top"><div class="q-num">3</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Vì sao hôm sương mù, bà Táp-táp lại đưa A-lanh về nhà được?</p>
+    <div class="options" data-type="mc" data-correct="c">
+      <label class="opt"><input type="radio" name="q3" value="a"> Vì lúc sương mù, mắt bà lại nhìn được.</label>
+      <label class="opt"><input type="radio" name="q3" value="b"> Vì lúc sương mù, đường có ít người qua lại.</label>
+      <label class="opt"><input type="radio" name="q3" value="c"> Vì bà biết dùng gậy dò đường về nhà.</label>
+    </div>
+    <div class="feedback" data-explain="Bà bị mù nên với bà, có sương mù hay không cũng như nhau — bà luôn dùng gậy để dò đường quen thuộc."></div>
+  </div>
+
+  <!-- Q4a -->
+  <div class="q-card" data-qid="q4a">
+    <div class="q-top"><div class="q-num">4a</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Câu chuyện có chi tiết nào bất ngờ?</p>
+    <div class="options" data-type="mc" data-correct="C">
+      <label class="opt"><input type="radio" name="q4a" value="A"> A-lanh ngày nào cũng giúp bà Táp-táp qua đường.</label>
+      <label class="opt"><input type="radio" name="q4a" value="B"> A-lanh không thể nhìn rõ đường vì sương mù dày đặc.</label>
+      <label class="opt"><input type="radio" name="q4a" value="C"> Bà Táp-táp bị mù nhưng lại dẫn A-lanh về nhà an toàn trong lúc sương mù.</label>
+      <label class="opt"><input type="radio" name="q4a" value="D"> Bà Táp-táp hẹn ngày mai A-lanh tiếp tục giúp bà qua đường.</label>
+    </div>
+    <div class="feedback" data-explain="Bất ngờ vì thường A-lanh là người giúp bà, nhưng lần này chính bà — dù bị mù — lại là người dẫn đường cho A-lanh."></div>
+  </div>
+
+  <!-- Q4b -->
+  <div class="q-card" data-qid="q4b">
+    <div class="q-top"><div class="q-num">4b</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Câu chuyện muốn nhắn nhủ với chúng ta điều gì?</p>
+    <div class="options" data-type="mc" data-correct="B">
+      <label class="opt"><input type="radio" name="q4b" value="A"> Chỉ những người nhìn thấy rõ mới có thể giúp đỡ người khác.</label>
+      <label class="opt"><input type="radio" name="q4b" value="B"> Mỗi người đều có điểm mạnh riêng và chúng ta nên biết quan tâm, giúp đỡ lẫn nhau.</label>
+      <label class="opt"><input type="radio" name="q4b" value="C"> Khi trời có sương mù, trẻ em không nên ra khỏi nhà.</label>
+      <label class="opt"><input type="radio" name="q4b" value="D"> Người lớn tuổi lúc nào cũng cần trẻ em giúp đỡ.</label>
+    </div>
+    <div class="feedback" data-explain="A-lanh giúp bà lúc trời đẹp, còn bà giúp A-lanh lúc sương mù — mỗi người một điểm mạnh, cùng nhau giúp đỡ."></div>
+  </div>
+
+  <!-- Q5a matching -->
+  <div class="q-card" data-qid="q5a">
+    <div class="q-top"><div class="q-num">5a</div><span class="q-tag q-tag-match tag-match">Nối từ</span></div>
+    <p class="q-text">Chọn từ ở cột B kết hợp phù hợp với mỗi từ ở cột A:</p>
+    <div class="match-group" data-type="match">
+      <div class="match-row" data-correct="b">
+        <div class="match-left">1. tính tình</div>
+        <select data-key="m1">
+          <option value="">— chọn —</option>
+          <option value="a">a. hiền hòa</option>
+          <option value="b">b. hiền lành</option>
+          <option value="c">c. hiền từ</option>
+          <option value="d">d. nhân ái</option>
+        </select>
+      </div>
+      <div class="match-row" data-correct="c">
+        <div class="match-left">2. cặp mắt</div>
+        <select data-key="m2">
+          <option value="">— chọn —</option>
+          <option value="a">a. hiền hòa</option>
+          <option value="b">b. hiền lành</option>
+          <option value="c">c. hiền từ</option>
+          <option value="d">d. nhân ái</option>
+        </select>
+      </div>
+      <div class="match-row" data-correct="a">
+        <div class="match-left">3. dòng sông</div>
+        <select data-key="m3">
+          <option value="">— chọn —</option>
+          <option value="a">a. hiền hòa</option>
+          <option value="b">b. hiền lành</option>
+          <option value="c">c. hiền từ</option>
+          <option value="d">d. nhân ái</option>
+        </select>
+      </div>
+      <div class="match-row" data-correct="d">
+        <div class="match-left">4. tấm lòng</div>
+        <select data-key="m4">
+          <option value="">— chọn —</option>
+          <option value="a">a. hiền hòa</option>
+          <option value="b">b. hiền lành</option>
+          <option value="c">c. hiền từ</option>
+          <option value="d">d. nhân ái</option>
+        </select>
+      </div>
+    </div>
+    <div class="feedback" data-explain="tính tình hiền lành · cặp mắt hiền từ · dòng sông hiền hòa · tấm lòng nhân ái."></div>
+  </div>
+
+  <!-- Q5b fill -->
+  <div class="q-card" data-qid="q5b">
+    <div class="q-top"><div class="q-num">5b</div><span class="q-tag tag-fill">Điền từ</span></div>
+    <p class="q-text">Chọn từ thích hợp ở cột B (mục a) điền vào chỗ trống:</p>
+    <div class="fill-group" data-type="fill">
+      <div class="fill-line"><span class="txt">a. Bạn Nhung lớp em rất</span><input type="text" data-key="f1" data-answers="hiền lành"><span class="txt">.</span></div>
+      <div class="fill-line"><span class="txt">b. Dòng sông chảy</span><input type="text" data-key="f2" data-answers="hiền hòa"><span class="txt">giữa hai bờ xanh mướt lúa ngô.</span></div>
+      <div class="fill-line"><span class="txt">c. Ba luôn nhìn em bằng cặp mắt</span><input type="text" data-key="f3" data-answers="hiền từ"><span class="txt">.</span></div>
+      <div class="fill-line"><span class="txt">d. Cụ già ấy là một người giàu lòng</span><input type="text" data-key="f4" data-answers="nhân ái"><span class="txt">.</span></div>
+    </div>
+    <div class="feedback" data-explain="hiền lành · hiền hòa · hiền từ · nhân ái."></div>
+  </div>
+
+  <!-- Q6 fill -->
+  <div class="q-card" data-qid="q6">
+    <div class="q-top"><div class="q-num">6</div><span class="q-tag tag-fill">Điền từ</span></div>
+    <p class="q-text">Chọn từ ngữ thích hợp điền vào chỗ trống để hoàn thành đoạn văn:</p>
+    <div class="word-bank">Ngân hàng từ: dân tộc, trang lịch sử, công lao, thời đại</div>
+    <div class="fill-group" data-type="fill" style="margin-top:12px;">
+      <div class="fill-line"><span class="txt">Chúng ta có quyền tự hào về những</span><input type="text" data-key="g1" data-answers="trang lịch sử"><span class="txt">vẻ vang của</span><input type="text" data-key="g2" data-answers="dân tộc"><span class="txt">— Bà Trưng, Bà Triệu, Trần Hưng Đạo, Lê Lợi, Quang Trung… Chúng ta phải ghi nhớ</span><input type="text" data-key="g3" data-answers="công lao"><span class="txt">của các vị anh hùng dân tộc, vì các vị ấy là tiêu biểu của một</span><input type="text" data-key="g4" data-answers="thời đại"><span class="txt">anh hùng.</span></div>
+    </div>
+    <div class="feedback" data-explain="trang lịch sử → dân tộc → công lao → thời đại."></div>
+  </div>
+
+  <!-- Q7 fill -->
+  <div class="q-card" data-qid="q7">
+    <div class="q-top"><div class="q-num">7★</div><span class="q-tag tag-fill">Điền từ</span></div>
+    <p class="q-text">Chọn từ ngữ thích hợp điền vào chỗ trống để hoàn chỉnh đoạn văn:</p>
+    <div class="word-bank">Ngân hàng từ: chùa Một Cột, Huế, chùa Trấn Quốc, Hồ Gươm, Hồ Tây, Kinh thành Huế, Văn Miếu – Quốc Tử Giám, sông Hương, hồ Bảy Mẫu, Thủ đô Hà Nội</div>
+    <div class="fill-group" data-type="fill" style="margin-top:12px;">
+      <div class="fill-line"><span class="txt">Đến với</span><input type="text" data-key="h1" data-answers="thủ đô hà nội|hà nội"><span class="txt">, bạn sẽ được chiêm ngưỡng nét kiến trúc cổ độc đáo của các chùa chiền như</span><input type="text" data-key="h2" data-answers="chùa một cột"><span class="txt">,</span><input type="text" data-key="h3" data-answers="chùa trấn quốc"><span class="txt">, được thăm</span><input type="text" data-key="h4" data-answers="văn miếu – quốc tử giám|văn miếu - quốc tử giám|văn miếu quốc tử giám"><span class="txt">, được dạo quanh những hồ đẹp như</span><input type="text" data-key="h5" data-answers="hồ gươm|hồ tây|hồ bảy mẫu"><span class="txt">,</span><input type="text" data-key="h6" data-answers="hồ gươm|hồ tây|hồ bảy mẫu"><span class="txt">. Về xứ</span><input type="text" data-key="h7" data-answers="huế"><span class="txt">, bạn sẽ được ngắm dòng</span><input type="text" data-key="h8" data-answers="sông hương"><span class="txt">thơ mộng, được dạo khắp</span><input type="text" data-key="h9" data-answers="kinh thành huế"><span class="txt">.</span></div>
+    </div>
+    <div class="feedback" data-explain="Thủ đô Hà Nội → chùa Một Cột → chùa Trấn Quốc → Văn Miếu – Quốc Tử Giám → hai trong ba hồ (Hồ Gươm / Hồ Tây / hồ Bảy Mẫu) → Huế → sông Hương → Kinh thành Huế."></div>
+  </div>
+
+</div>
+
+<div class="wrap">
+  <div class="submit-zone">
+    <button class="btn-submit" id="submitBtn">🎉 Nộp bài</button>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-emoji" id="resultEmoji">🌤️</div>
+    <div class="result-score" id="resultScore">0 / 23 điểm</div>
+    <div class="result-msg" id="resultMsg">Sương mù đã tan hết rồi!</div>
+    <button class="btn-retry" id="retryBtn">↺ Làm lại</button>
+  </div>
+</div>
+
+<footer>Được tạo tự động từ đề "Lớp 4 – Tuần 2" · Chúc em học vui! 🌈</footer>
+
+<script>
+const qCards = Array.from(document.querySelectorAll('.q-card'));
+const totalGroups = qCards.length; // 9
+
+function normalize(s){
+  return (s||'').trim().toLowerCase().replace(/[.,!?;:"']/g,'').replace(/\s+/g,' ');
+}
+
+function updateProgress(){
+  let answered = 0;
+  qCards.forEach(card=>{
+    if(isGroupTouched(card)) answered++;
+  });
+  const pct = Math.round((answered/totalGroups)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-walker').style.left = pct+'%';
+  document.getElementById('progress-count').textContent = answered+' / '+totalGroups+' câu';
+}
+
+function isGroupTouched(card){
+  const mc = card.querySelector('.options[data-type="mc"]');
+  if(mc){ return !!mc.querySelector('input:checked'); }
+  const match = card.querySelector('.match-group[data-type="match"]');
+  if(match){ return Array.from(match.querySelectorAll('select')).some(s=>s.value!==''); }
+  const fill = card.querySelector('.fill-group[data-type="fill"]');
+  if(fill){ return Array.from(fill.querySelectorAll('input[type=text]')).some(i=>i.value.trim()!==''); }
+  return false;
+}
+
+// live "picked" highlight + progress updates
+qCards.forEach(card=>{
+  card.addEventListener('change', ()=>{
+    const opts = card.querySelectorAll('.opt');
+    opts.forEach(o=>{
+      const input = o.querySelector('input');
+      o.classList.toggle('picked', input.checked);
+    });
+    updateProgress();
+  });
+  card.addEventListener('input', updateProgress);
+});
+
+document.getElementById('submitBtn').addEventListener('click', ()=>{
+  const nameInput = document.getElementById('studentName');
+  if(nameInput.value.trim()===''){
+    nameInput.style.borderColor = 'var(--coral)';
+    nameInput.focus();
+    nameInput.placeholder = 'Em nhớ điền tên trước khi nộp bài nhé!';
+    return;
+  }
+  nameInput.style.borderColor = '#eaeff6';
+
+  let earned = 0, possible = 0;
+  let answeredGroups = 0;
+
+  qCards.forEach(card=>{
+    let groupCorrect = true;
+    let groupTouched = isGroupTouched(card);
+    if(groupTouched) answeredGroups++;
+
+    const mc = card.querySelector('.options[data-type="mc"]');
+    if(mc){
+      possible += 1;
+      const checked = mc.querySelector('input:checked');
+      const correctVal = mc.getAttribute('data-correct');
+      const isCorrect = checked && checked.value === correctVal;
+      if(isCorrect) earned += 1;
+      // mark options
+      mc.querySelectorAll('.opt').forEach(o=>{
+        const input = o.querySelector('input');
+        if(input.value === correctVal) o.classList.add('correct-answer');
+      });
+      groupCorrect = !!isCorrect;
+    }
+
+    const match = card.querySelector('.match-group[data-type="match"]');
+    if(match){
+      const rows = Array.from(match.querySelectorAll('.match-row'));
+      possible += rows.length;
+      let allOk = true;
+      rows.forEach(row=>{
+        const sel = row.querySelector('select');
+        const correctVal = row.getAttribute('data-correct');
+        const ok = sel.value === correctVal;
+        if(ok) earned += 1; else allOk = false;
+        sel.style.borderColor = sel.value ? (ok ? '#3fb083' : '#ff6b6b') : '#eaeff6';
+      });
+      groupCorrect = allOk;
+    }
+
+    const fill = card.querySelector('.fill-group[data-type="fill"]');
+    if(fill){
+      const inputs = Array.from(fill.querySelectorAll('input[type=text]'));
+      possible += inputs.length;
+      let allOk = true;
+      inputs.forEach(inp=>{
+        const accepted = (inp.getAttribute('data-answers')||'').split('|').map(normalize);
+        const ok = accepted.includes(normalize(inp.value));
+        if(ok) earned += 1; else allOk = false;
+        inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e8523f');
+        inp.style.borderBottomColor = inp.value.trim()==='' ? '#b9c3d4' : (ok ? '#3fb083' : '#ff6b6b');
+      });
+      groupCorrect = allOk;
+    }
+
+    card.classList.remove('answered','correct','incorrect');
+    if(groupTouched){
+      card.classList.add(groupCorrect ? 'correct' : 'incorrect');
+    }
+  });
+
+  updateProgress();
+
+  const pct = Math.round((earned/possible)*100);
+  const resultPanel = document.getElementById('resultPanel');
+  document.getElementById('resultScore').textContent = earned+' / '+possible+' điểm';
+  let emoji, msg;
+  if(pct >= 90){ emoji='🌞'; msg='Tuyệt vời! Sương mù tan hết, em giỏi quá!'; }
+  else if(pct >= 70){ emoji='🌤️'; msg='Rất tốt! Em đã đi gần hết con đường rồi.'; }
+  else if(pct >= 50){ emoji='⛅'; msg='Khá lắm! Xem lại vài câu để giỏi hơn nữa nhé.'; }
+  else { emoji='🌫️'; msg='Đừng lo, hãy đọc lại bài và thử lần nữa nhé!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMsg').textContent = nameInput.value.trim()+' ơi, '+msg;
+  resultPanel.classList.add('show');
+  resultPanel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('retryBtn').addEventListener('click', ()=>{
+  document.getElementById('studentName').value='';
+  document.getElementById('studentName').style.borderColor='#eaeff6';
+  document.getElementById('studentName').placeholder='Nhập họ và tên của em...';
+  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  document.querySelectorAll('input[type=text]').forEach(i=>{i.value='';i.style.color='';i.style.borderBottomColor='';});
+  document.querySelectorAll('select').forEach(s=>{s.value='';s.style.borderColor='';});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked'));
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('answered','correct','incorrect'));
+  document.getElementById('resultPanel').classList.remove('show');
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+updateProgress();
+</script>
+</body>
+</html>
