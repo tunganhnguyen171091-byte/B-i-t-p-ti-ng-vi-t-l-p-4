@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Những niềm vui — Bài tập Tiếng Việt Lớp 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff6fa5; --pink-deep:#e2477f;
+    --sun:#ffc93c; --sun-deep:#ffab00;
+    --sky:#4bb3e6; --sky-deep:#2a8fc4;
+    --leaf:#4bc17e; --leaf-deep:#31a163;
+    --lav:#a07fdc; --lav-deep:#8160c2;
+    --coral:#ff7a6e; --coral-deep:#e35b4d;
+    --ink:#2d3142; --ink-soft:#5a5f75;
+    --paper:#ffffff; --radius:22px;
+    --shadow:0 10px 26px rgba(45,49,66,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:'Quicksand',sans-serif;color:var(--ink);
+    background:
+      radial-gradient(circle at 10% 6%, #fff0f6 0%, transparent 45%),
+      radial-gradient(circle at 92% 4%, #eaf7ff 0%, transparent 42%),
+      radial-gradient(circle at 50% 90%, #f3ecff 0%, transparent 40%),
+      linear-gradient(180deg, #fffaf3 0%, #fdf9ef 100%);
+    min-height:100vh;padding-bottom:60px;
+  }
+  h1,h2,h3{font-family:'Baloo 2',sans-serif;}
+
+  .hero{text-align:center;padding:36px 18px 20px;}
+  .hero-badge{display:inline-block;background:var(--paper);border:2px dashed var(--pink-deep);color:var(--pink-deep);font-weight:700;font-size:14px;padding:6px 16px;border-radius:999px;margin-bottom:14px;}
+  .hero h1{font-size:clamp(26px,5.8vw,40px);margin:0 0 8px;line-height:1.15;}
+  .hero h1 span{color:var(--pink-deep);}
+  .hero p.sub{max-width:540px;margin:0 auto;color:var(--ink-soft);font-weight:600;font-size:15.5px;}
+
+  .chibi-row{display:flex;justify-content:center;gap:12px;margin-top:18px;flex-wrap:wrap;}
+  .chibi-row svg{width:80px;height:80px;filter:drop-shadow(0 6px 10px rgba(45,49,66,0.12));}
+
+  .name-card{max-width:400px;margin:22px auto 0;background:var(--paper);border-radius:18px;box-shadow:var(--shadow);padding:16px 20px;border:2px solid #ffd3e6;display:flex;flex-direction:column;gap:6px;}
+  .name-card label{font-weight:700;font-size:14px;color:var(--pink-deep);display:flex;align-items:center;gap:6px;}
+  .name-card input{border:2px solid #eaeff6;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:16px;color:var(--ink);}
+  .name-card input:focus{outline:none;border-color:var(--sun-deep);}
+
+  .progress-wrap{max-width:640px;margin:26px auto 0;padding:0 18px;}
+  .progress-label{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:8px;}
+  #progress-count{color:var(--pink-deep);font-size:16px;}
+  .progress-track{position:relative;height:34px;border-radius:999px;background:linear-gradient(90deg,#ffe3ef,#fff5f9);border:2px solid #ffd3e6;overflow:hidden;box-shadow:inset 0 2px 5px rgba(45,49,66,0.08);}
+  .progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--sun),var(--pink) 55%,var(--lav) 100%);border-radius:999px;transition:width .5s cubic-bezier(.4,1.4,.6,1);}
+  .progress-walker{position:absolute;top:50%;transform:translate(-50%,-50%);left:0%;font-size:20px;transition:left .5s cubic-bezier(.4,1.4,.6,1);filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));}
+
+  .wrap{max-width:640px;margin:32px auto 0;padding:0 18px;display:flex;flex-direction:column;gap:22px;}
+
+  .story-card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 24px;position:relative;border-top:6px solid var(--pink-deep);}
+  .story-card h2{margin:0 0 4px;font-size:22px;color:var(--pink-deep);display:flex;align-items:center;gap:8px;}
+  .story-card .story-meta{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:14px;}
+  .story-card p{line-height:1.75;font-size:15.5px;margin:0 0 12px;color:#3a3f52;}
+  .story-card p:first-of-type::first-letter{font-family:'Baloo 2',sans-serif;font-size:44px;color:var(--pink-deep);float:left;line-height:0.8;padding-right:8px;padding-top:4px;}
+  .story-illustration{display:flex;justify-content:center;gap:14px;margin:6px 0 14px;flex-wrap:wrap;}
+  .story-illustration svg{width:70px;height:70px;}
+
+  .q-card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 24px;border:2px solid transparent;transition:border-color .25s;scroll-margin-top:20px;}
+  .q-card.correct{border-color:var(--leaf) !important;background:#f1faf4;}
+  .q-card.incorrect{border-color:var(--coral) !important;background:#fff4f3;}
+  .q-card.neutral{border-color:var(--lav) !important;background:#f7f3ff;}
+
+  .q-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+  .q-num{width:34px;height:34px;border-radius:50%;background:var(--sun);color:#7a4b00;font-family:'Baloo 2',sans-serif;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex:none;}
+  .q-tag{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#ffe3ef;color:var(--pink-deep);letter-spacing:.3px;}
+  .q-tag.tag-fill{background:#e2f7ff;color:var(--sky-deep);}
+  .q-tag.tag-open{background:#f0e8ff;color:var(--lav-deep);}
+  .q-text{font-weight:700;font-size:16px;margin:0 0 14px;color:var(--ink);line-height:1.5;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fdf6f9;border:2px solid #f6e2ea;cursor:pointer;transition:all .15s;font-weight:600;font-size:15px;}
+  .opt:hover{background:#ffeef5;border-color:#ffbdd8;}
+  .opt input{accent-color:var(--pink-deep);width:18px;height:18px;flex:none;}
+  .opt.picked{background:#fff2d6;border-color:var(--sun-deep);}
+  .q-card.correct .opt.picked{background:#dcf5e9;border-color:var(--leaf);}
+  .q-card.incorrect .opt.picked{background:#ffe1de;border-color:var(--coral);}
+  .q-card.incorrect .opt.correct-answer{background:#dcf5e9;border-color:var(--leaf);}
+
+  .match-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .match-left{background:#fdf6f9;border:2px solid #f6e2ea;border-radius:12px;padding:9px 12px;font-weight:700;min-width:80px;flex:1;}
+  .match-row select{flex:2;min-width:200px;padding:9px 10px;border-radius:12px;border:2px solid #f6e2ea;background:#fff;font-family:'Quicksand',sans-serif;font-weight:600;font-size:14px;color:var(--ink);}
+  .match-row select:focus{outline:2px solid var(--sun-deep);}
+
+  .check-grid{display:flex;flex-direction:column;gap:8px;}
+  .check-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:#fdf6f9;border:2px solid #f6e2ea;cursor:pointer;font-weight:600;font-size:14.5px;}
+  .check-opt input{accent-color:var(--sky-deep);width:17px;height:17px;flex:none;}
+  .check-opt.state-correct{background:#dcf5e9;border-color:var(--leaf);}
+  .check-opt.state-incorrect{background:#ffe1de;border-color:var(--coral);}
+
+  textarea.open-answer{width:100%;min-height:90px;border:2px solid #eaeff6;border-radius:14px;padding:12px 14px;font-family:'Quicksand',sans-serif;font-weight:600;font-size:14.5px;color:var(--ink);resize:vertical;}
+  textarea.open-answer:focus{outline:none;border-color:var(--sun-deep);}
+
+  .feedback{margin-top:14px;padding:12px 14px;border-radius:14px;font-size:14px;font-weight:600;display:none;line-height:1.6;}
+  .q-card.correct .feedback{display:block;background:#e4f7ee;color:#1d7a52;}
+  .q-card.incorrect .feedback{display:block;background:#ffe9e6;color:#b3392a;}
+  .q-card.neutral .feedback{display:block;background:#f0e8ff;color:#5f3ea8;}
+
+  .submit-zone{position:sticky;bottom:14px;display:flex;justify-content:center;margin-top:6px;z-index:20;}
+  .btn-submit{background:linear-gradient(135deg,var(--pink),var(--pink-deep));color:#fff;border:none;padding:16px 38px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:700;box-shadow:0 10px 22px rgba(226,71,127,.35);cursor:pointer;transition:transform .15s;}
+  .btn-submit:hover{transform:translateY(-2px) scale(1.02);}
+  .btn-submit:active{transform:translateY(0) scale(.98);}
+
+  .result-panel{background:linear-gradient(160deg,#fff,#fff5f9);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 24px;text-align:center;border-top:6px solid var(--pink);display:none;}
+  .result-panel.show{display:block;animation:pop .5s;}
+  @keyframes pop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .result-emoji{font-size:52px;margin-bottom:6px;}
+  .result-score{font-family:'Baloo 2',sans-serif;font-size:46px;color:var(--pink-deep);margin:4px 0;}
+  .result-msg{font-weight:700;font-size:17px;color:var(--ink);margin-bottom:16px;}
+  .btn-retry{background:var(--lav-deep);color:#fff;border:none;padding:12px 28px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:700;cursor:pointer;}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:28px;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-badge">TIẾNG VIỆT · LỚP 4 · TUẦN 5</span>
+  <h1>Những <span>niềm vui</span></h1>
+  <p class="sub">Mỗi bạn nhỏ có một niềm vui riêng — dải băng đẹp, hộp bút chì màu, cần câu cá, hay chỉ là một bông hoa dưới nắng. Cùng khám phá niềm vui của các bạn nhé!</p>
+
+  <div class="chibi-row" aria-hidden="true">
+    <!-- Ribbon (Hoa) -->
+    <svg viewBox="0 0 100 100"><path d="M50 45c-14-14-30-6-30 6s16 12 30 6M50 45c14-14 30-6 30 6s-16 12-30 6" fill="#ff6fa5" stroke="#e2477f" stroke-width="2"/><circle cx="50" cy="47" r="8" fill="#ffb3cf"/><path d="M50 55l-6 18M50 55l6 18" stroke="#e2477f" stroke-width="4" stroke-linecap="round"/></svg>
+    <!-- Pencils (Hồng) -->
+    <svg viewBox="0 0 100 100"><g transform="rotate(-18 50 50)"><rect x="30" y="20" width="10" height="55" rx="3" fill="#ffc93c"/><path d="M30 20l5-12 5 12z" fill="#f4a53a"/><rect x="30" y="70" width="10" height="6" fill="#5a5f75"/></g><g transform="rotate(0 50 50)"><rect x="45" y="15" width="10" height="60" rx="3" fill="#4bc17e"/><path d="M45 15l5-12 5 12z" fill="#3fa066"/><rect x="45" y="70" width="10" height="6" fill="#5a5f75"/></g><g transform="rotate(18 50 50)"><rect x="60" y="20" width="10" height="55" rx="3" fill="#4bb3e6"/><path d="M60 20l5-12 5 12z" fill="#3690bf"/><rect x="60" y="70" width="10" height="6" fill="#5a5f75"/></g></svg>
+    <!-- Fishing rod (Hùng) -->
+    <svg viewBox="0 0 100 100"><path d="M15 85L75 20" stroke="#c98a4b" stroke-width="4" stroke-linecap="round"/><path d="M75 20c10 25 5 45-5 55" stroke="#8a8f9c" stroke-width="1.5" fill="none"/><circle cx="70" cy="78" r="9" fill="#ffc93c" stroke="#ffab00" stroke-width="2"/><path d="M66 76c1-2 6-2 7 0" stroke="#2d3142" stroke-width="1.5" fill="none"/></svg>
+    <!-- Flower + silver fish (Tuấn) -->
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="35" r="7" fill="#ffe27a"/>
+      <circle cx="50" cy="22" r="8" fill="#fff"/><circle cx="61" cy="29" r="8" fill="#fff"/><circle cx="61" cy="42" r="8" fill="#fff"/><circle cx="50" cy="49" r="8" fill="#fff"/><circle cx="39" cy="42" r="8" fill="#fff"/><circle cx="39" cy="29" r="8" fill="#fff"/>
+      <path d="M50 55v20" stroke="#4bc17e" stroke-width="3"/>
+      <ellipse cx="70" cy="80" rx="16" ry="9" fill="#cfe9f5"/>
+      <path d="M25 78c8-6 18-6 22 0s-14 6-22 0z" fill="#c7d3db"/>
+      <path d="M45 78l7-5v10z" fill="#a9b7c2"/>
+    </svg>
+  </div>
+</div>
+
+<div class="name-card">
+  <label for="studentName">✏️ Họ và tên của con là gì?</label>
+  <input type="text" id="studentName" placeholder="Nhập họ và tên của em...">
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Hành trình niềm vui</span><span id="progress-count">0 / 7 câu</span></div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-walker" id="progress-walker">🌈</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- STORY -->
+  <div class="story-card">
+    <h2>📖 Những niềm vui</h2>
+    <div class="story-meta">(Theo L. Vô-rôn-cô-va)</div>
+    <div class="story-illustration" aria-hidden="true">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#fff0f6"/><path d="M30 24c-8-8-18-4-18 4s10 8 18 4M30 24c8-8 18-4 18 4s-10 8-18 4" fill="#ff6fa5"/></svg>
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#eafaf1"/><rect x="18" y="14" width="7" height="34" rx="2" fill="#ffc93c" transform="rotate(-15 21 31)"/><rect x="30" y="12" width="7" height="34" rx="2" fill="#4bc17e"/></svg>
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#eaf5ff"/><path d="M12 48L44 16" stroke="#c98a4b" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="42" r="6" fill="#ffc93c"/></svg>
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#f3ecff"/><ellipse cx="42" cy="42" rx="10" ry="6" fill="#cfe9f5"/><path d="M32 42l4-3v6z" fill="#a9b7c2"/></svg>
+    </div>
+    <p>Cả bọn ngồi trên những phiến gỗ dưới đám bạch đàn tán chuyện. Hoa nói: — Tớ có chuyện vui. Xem này, tớ có dải băng buộc đầu mới thật đẹp.</p>
+    <p>— Tớ cũng có chuyện vui. — Hồng tiếp lời. — Tớ vừa được tặng một hộp bút chì màu.</p>
+    <details class="story-toggle">
+      <summary style="cursor:pointer;font-weight:700;color:var(--pink-deep);">▶ Đọc tiếp câu chuyện</summary>
+      <p>— Thế thì có gì đáng vui. — Hùng lên tiếng. — Tớ có cái cần câu cơ. Muốn câu bao nhiêu cá cũng có.</p>
+      <p>— Chỉ có Tuấn là không có chuyện gì vui. — Hoa nói. — Cậu ấy chẳng nói gì.</p>
+      <p>— Có chứ, tớ trông thấy hoa cơ. — Tuấn vội nói. Cả bọn nhao nhao hỏi: — Hoa gì?</p>
+      <p>— Hoa ở trong rừng ấy! Giữa bãi cỏ. Lúc đó là mùa xuân. Trời tối mà hoa vẫn trắng phau như thể trời vẫn sáng. Các bạn cười ồ lên: — Thế mà cũng gọi là chuyện vui!</p>
+      <p>— Tớ còn thấy cả mái nhà mùa đông, sương mù phủ kín. Thế rồi bỗng nắng chiếu xuống. Một bên mái xanh biếc. Bên kia lại đỏ ửng. Tất cả cứ sáng rực lên. — Cậu chỉ giỏi tưởng tượng. Làm gì có xanh với đỏ. Cậu chẳng có chuyện gì vui nữa à?</p>
+      <p>— Có chứ. — Tuấn đáp. — Một lần tớ nhìn thấy con cá bạc. — Cậu định phịa chuyện gì nữa đấy? — Hùng phá lên cười.</p>
+      <p>— Không, không phải đâu. — Tuấn nói. — Mưa rào tạnh, ở dưới gốc táo có một vũng nước trong vắt. Rồi mặt trời chiếu vào đó. Gió thoảng nhẹ. Sóng gợn lên và những con cá bạc lấp lánh trong đó.</p>
+      <p>— Chẳng có gì vui cả. — Hoa, Hùng cười ầm ĩ. Chỉ có Hồng có vẻ đăm chiêu: — Có lẽ những niềm vui của cậu ấy lớn hơn niềm vui của chúng mình thật. Cậu ấy thấy chúng ở những gì mà chúng mình không nhìn thấy.</p>
+    </details>
+  </div>
+
+  <!-- Q1 matching -->
+  <div class="q-card" data-qid="q1">
+    <div class="q-top"><div class="q-num">1</div><span class="q-tag">Nối câu</span></div>
+    <p class="q-text">Nối mỗi bạn với niềm vui của bạn ấy:</p>
+    <div class="match-group" data-type="match">
+      <div class="match-row" data-correct="4"><div class="match-left">a. Hoa</div>
+        <select data-key="m1"><option value="">— chọn —</option>
+          <option value="1">1. vui vì có cần câu</option>
+          <option value="2">2. vui vì thấy vẻ đẹp hoa, mái nhà, cá bạc</option>
+          <option value="3">3. vui vì được tặng hộp bút chì màu</option>
+          <option value="4">4. vui vì có dải băng buộc đầu mới đẹp</option>
+        </select></div>
+      <div class="match-row" data-correct="3"><div class="match-left">b. Hồng</div>
+        <select data-key="m2"><option value="">— chọn —</option>
+          <option value="1">1. vui vì có cần câu</option>
+          <option value="2">2. vui vì thấy vẻ đẹp hoa, mái nhà, cá bạc</option>
+          <option value="3">3. vui vì được tặng hộp bút chì màu</option>
+          <option value="4">4. vui vì có dải băng buộc đầu mới đẹp</option>
+        </select></div>
+      <div class="match-row" data-correct="1"><div class="match-left">c. Hùng</div>
+        <select data-key="m3"><option value="">— chọn —</option>
+          <option value="1">1. vui vì có cần câu</option>
+          <option value="2">2. vui vì thấy vẻ đẹp hoa, mái nhà, cá bạc</option>
+          <option value="3">3. vui vì được tặng hộp bút chì màu</option>
+          <option value="4">4. vui vì có dải băng buộc đầu mới đẹp</option>
+        </select></div>
+      <div class="match-row" data-correct="2"><div class="match-left">d. Tuấn</div>
+        <select data-key="m4"><option value="">— chọn —</option>
+          <option value="1">1. vui vì có cần câu</option>
+          <option value="2">2. vui vì thấy vẻ đẹp hoa, mái nhà, cá bạc</option>
+          <option value="3">3. vui vì được tặng hộp bút chì màu</option>
+          <option value="4">4. vui vì có dải băng buộc đầu mới đẹp</option>
+        </select></div>
+    </div>
+    <div class="feedback" data-explain="Hoa → dải băng đẹp · Hồng → hộp bút chì màu · Hùng → cần câu · Tuấn → vẻ đẹp của hoa, mái nhà, cá bạc."></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" data-qid="q2">
+    <div class="q-top"><div class="q-num">2</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Câu nào cho thấy vẻ đẹp của hoa mùa xuân mà Tuấn nhìn thấy?</p>
+    <div class="options" data-type="mc" data-correct="c">
+      <label class="opt"><input type="radio" name="q2" value="a"> Tớ trông thấy hoa cỏ.</label>
+      <label class="opt"><input type="radio" name="q2" value="b"> Hoa ở trong rừng ấy.</label>
+      <label class="opt"><input type="radio" name="q2" value="c"> Trời tối mà hoa vẫn trắng phau như thể trời vẫn sáng.</label>
+    </div>
+    <div class="feedback" data-explain="Câu này miêu tả trực tiếp vẻ đẹp rực rỡ của hoa ngay cả trong bóng tối."></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" data-qid="q3">
+    <div class="q-top"><div class="q-num">3</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Vì sao Hồng cho rằng niềm vui của Tuấn lớn hơn niềm vui của các bạn khác?</p>
+    <div class="options" data-type="mc" data-correct="c">
+      <label class="opt"><input type="radio" name="q3" value="a"> Tuấn có nhiều niềm vui hơn các bạn.</label>
+      <label class="opt"><input type="radio" name="q3" value="b"> Tuấn được đi nhiều nơi nên thấy được nhiều thứ lạ kì.</label>
+      <label class="opt"><input type="radio" name="q3" value="c"> Tuấn nhìn thấy vẻ đẹp trong những sự vật rất bình thường mà người khác không nhận ra.</label>
+    </div>
+    <div class="feedback" data-explain="Hồng nói: 'Cậu ấy thấy chúng ở những gì mà chúng mình không nhìn thấy' — ý nói Tuấn có con mắt tinh tế nhận ra cái đẹp bình dị."></div>
+  </div>
+
+  <!-- Q4 open reflection -->
+  <div class="q-card" data-qid="q4">
+    <div class="q-top"><div class="q-num">4★</div><span class="q-tag tag-open">Chia sẻ cảm nhận</span></div>
+    <p class="q-text">Mỗi niềm vui của Tuấn gợi ra một hình ảnh đẹp. Em thích hình ảnh nào nhất? Vì sao? (Viết 2–3 câu)</p>
+    <textarea class="open-answer" data-key="open4" placeholder="Em thích hình ảnh... vì..."></textarea>
+    <div class="feedback" data-explain="Câu này không chấm đúng/sai — cô/thầy sẽ đọc trực tiếp câu trả lời của em. Cảm ơn em đã chia sẻ nhé! 💛"></div>
+  </div>
+
+  <!-- Q5 matching idioms -->
+  <div class="q-card" data-qid="q5">
+    <div class="q-top"><div class="q-num">5</div><span class="q-tag">Nối câu</span></div>
+    <p class="q-text">Nối mỗi thành ngữ với nghĩa thích hợp:</p>
+    <div class="match-group" data-type="match">
+      <div class="match-row" data-correct="b"><div class="match-left">1. Cầu được ước thấy</div>
+        <select data-key="i1"><option value="">— chọn —</option>
+          <option value="a">a. Không biết bằng lòng với hiện tại, mơ điều khác</option>
+          <option value="b">b. Đạt được điều mình mơ ước</option>
+          <option value="c">c. Muốn những điều trái với lẽ thường</option>
+        </select></div>
+      <div class="match-row" data-correct="c"><div class="match-left">2. Ước quả trái mùa</div>
+        <select data-key="i2"><option value="">— chọn —</option>
+          <option value="a">a. Không biết bằng lòng với hiện tại, mơ điều khác</option>
+          <option value="b">b. Đạt được điều mình mơ ước</option>
+          <option value="c">c. Muốn những điều trái với lẽ thường</option>
+        </select></div>
+      <div class="match-row" data-correct="a"><div class="match-left">3. Đứng núi này trông núi nọ</div>
+        <select data-key="i3"><option value="">— chọn —</option>
+          <option value="a">a. Không biết bằng lòng với hiện tại, mơ điều khác</option>
+          <option value="b">b. Đạt được điều mình mơ ước</option>
+          <option value="c">c. Muốn những điều trái với lẽ thường</option>
+        </select></div>
+    </div>
+    <div class="feedback" data-explain="Cầu được ước thấy = đạt điều mơ ước · Ước quả trái mùa = muốn điều trái lẽ thường · Đứng núi này trông núi nọ = không bằng lòng hiện tại."></div>
+  </div>
+
+  <!-- Q6 checkbox: proper nouns needing capitalization -->
+  <div class="q-card" data-qid="q6">
+    <div class="q-top"><div class="q-num">6★</div><span class="q-tag tag-fill">Chọn đáp án</span></div>
+    <p class="q-text">Đoạn văn: <i>"...Lên đà lạt bạn được tận hưởng không khí trong lành, được du thuyền trên hồ xuân hương, được ngắm thác cam ly..."</i><br>Hãy chọn những cụm từ là <b>danh từ riêng (tên địa danh) đang bị viết sai chính tả</b> (chưa viết hoa):</p>
+    <div class="check-grid" data-type="check">
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="c1"> đà lạt <span style="color:#999;font-weight:400;">→ nên viết: Đà Lạt</span></label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="c2"> hồ xuân hương <span style="color:#999;font-weight:400;">→ nên viết: hồ Xuân Hương</span></label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="c3"> thác cam ly <span style="color:#999;font-weight:400;">→ nên viết: thác Cam Ly</span></label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="c4"> thạch nhũ <span style="color:#999;font-weight:400;">(danh từ chung)</span></label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="c5"> hang động <span style="color:#999;font-weight:400;">(danh từ chung)</span></label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="c6"> thắng cảnh <span style="color:#999;font-weight:400;">(danh từ chung)</span></label>
+    </div>
+    <div class="feedback" data-explain="Đà Lạt, hồ Xuân Hương, thác Cam Ly là tên địa danh (danh từ riêng) nên phần tên riêng phải viết hoa. Thạch nhũ, hang động, thắng cảnh là danh từ chung, không cần viết hoa."></div>
+  </div>
+
+  <!-- Q7 checkbox: nouns vs verbs -->
+  <div class="q-card" data-qid="q7">
+    <div class="q-top"><div class="q-num">7★</div><span class="q-tag tag-fill">Chọn đáp án</span></div>
+    <p class="q-text">Câu: <i>"Nhiều bức ảnh khiến người xem phải ngỡ ngàng khi thấy tình cảm và tâm hồn được nâng lên. Tình người trong bức ảnh đã tạo nên mối giao cảm trong công chúng thưởng thức nghệ thuật."</i></p>
+    <p class="q-text" style="font-size:14.5px;margin-bottom:8px;">a) Chọn tất cả các <b>DANH TỪ</b> có trong câu:</p>
+    <div class="check-grid" data-type="check" style="margin-bottom:18px;">
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="n1"> bức ảnh</label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="n2"> người xem</label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="n3"> tình cảm</label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="n4"> tâm hồn</label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="n5"> nghệ thuật</label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="n6"> khiến</label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="n7"> thấy</label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="n8"> tạo nên</label>
+    </div>
+    <p class="q-text" style="font-size:14.5px;margin-bottom:8px;">b) Chọn tất cả các <b>ĐỘNG TỪ</b> có trong câu:</p>
+    <div class="check-grid" data-type="check">
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="v1"> khiến</label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="v2"> thấy</label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="v3"> tạo nên</label>
+      <label class="check-opt" data-correct="true"><input type="checkbox" data-key="v4"> thưởng thức</label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="v5"> bức ảnh</label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="v6"> tâm hồn</label>
+      <label class="check-opt" data-correct="false"><input type="checkbox" data-key="v7"> nghệ thuật</label>
+    </div>
+    <div class="feedback" data-explain="Danh từ: bức ảnh, người xem, tình cảm, tâm hồn, nghệ thuật (và tình người, mối giao cảm, công chúng). Động từ: khiến, thấy, tạo nên, thưởng thức (và nâng lên)."></div>
+  </div>
+
+</div>
+
+<div class="wrap">
+  <div class="submit-zone">
+    <button class="btn-submit" id="submitBtn">🎉 Nộp bài</button>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-emoji" id="resultEmoji">🌟</div>
+    <div class="result-score" id="resultScore">0 / 25 điểm</div>
+    <div class="result-msg" id="resultMsg">Em đã tìm thấy thật nhiều niềm vui!</div>
+    <button class="btn-retry" id="retryBtn">↺ Làm lại</button>
+  </div>
+</div>
+
+<footer>Được tạo tự động từ đề "Lớp 4 – Tuần 5" · Chúc em học vui! 🌈</footer>
+
+<script>
+const qCards = Array.from(document.querySelectorAll('.q-card'));
+const totalGroups = qCards.length;
+
+function normalize(s){ return (s||'').trim().toLowerCase().replace(/[.,!?;:"']/g,'').replace(/\s+/g,' '); }
+
+function updateProgress(){
+  let answered = 0;
+  qCards.forEach(card=>{ if(isGroupTouched(card)) answered++; });
+  const pct = Math.round((answered/totalGroups)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-walker').style.left = pct+'%';
+  document.getElementById('progress-count').textContent = answered+' / '+totalGroups+' câu';
+}
+
+function isGroupTouched(card){
+  const mc = card.querySelector('.options[data-type="mc"]');
+  if(mc){ return !!mc.querySelector('input:checked'); }
+  const match = card.querySelector('.match-group[data-type="match"]');
+  if(match){ return Array.from(match.querySelectorAll('select')).some(s=>s.value!==''); }
+  const checks = card.querySelectorAll('.check-grid[data-type="check"]');
+  if(checks.length){ return Array.from(card.querySelectorAll('.check-grid input[type=checkbox]')).some(c=>c.checked); }
+  const open = card.querySelector('textarea.open-answer');
+  if(open){ return open.value.trim()!==''; }
+  return false;
+}
+
+qCards.forEach(card=>{
+  card.addEventListener('change', ()=>{
+    card.querySelectorAll('.opt').forEach(o=>{
+      const input = o.querySelector('input');
+      o.classList.toggle('picked', input.checked);
+    });
+    updateProgress();
+  });
+  card.addEventListener('input', updateProgress);
+});
+
+document.getElementById('submitBtn').addEventListener('click', ()=>{
+  const nameInput = document.getElementById('studentName');
+  if(nameInput.value.trim()===''){
+    nameInput.style.borderColor = 'var(--coral)';
+    nameInput.focus();
+    nameInput.placeholder = 'Em nhớ điền tên trước khi nộp bài nhé!';
+    return;
+  }
+  nameInput.style.borderColor = '#eaeff6';
+
+  let earned = 0, possible = 0;
+
+  qCards.forEach(card=>{
+    let groupCorrect = true;
+    let groupTouched = isGroupTouched(card);
+    let isOpenEnded = false;
+
+    const mc = card.querySelector('.options[data-type="mc"]');
+    if(mc){
+      possible += 1;
+      const checked = mc.querySelector('input:checked');
+      const correctVal = mc.getAttribute('data-correct');
+      const isCorrect = checked && checked.value === correctVal;
+      if(isCorrect) earned += 1;
+      mc.querySelectorAll('.opt').forEach(o=>{
+        const input = o.querySelector('input');
+        if(input.value === correctVal) o.classList.add('correct-answer');
+      });
+      groupCorrect = !!isCorrect;
+    }
+
+    const match = card.querySelector('.match-group[data-type="match"]');
+    if(match){
+      const rows = Array.from(match.querySelectorAll('.match-row'));
+      possible += rows.length;
+      let allOk = true;
+      rows.forEach(row=>{
+        const sel = row.querySelector('select');
+        const correctVal = row.getAttribute('data-correct');
+        const ok = sel.value === correctVal;
+        if(ok) earned += 1; else allOk = false;
+        sel.style.borderColor = sel.value ? (ok ? '#3fb083' : '#ff7a6e') : '#f6e2ea';
+      });
+      groupCorrect = allOk;
+    }
+
+    const checkGroups = card.querySelectorAll('.check-grid[data-type="check"]');
+    if(checkGroups.length){
+      let allOk = true;
+      checkGroups.forEach(grp=>{
+        const opts = Array.from(grp.querySelectorAll('.check-opt'));
+        possible += opts.length;
+        opts.forEach(o=>{
+          const input = o.querySelector('input');
+          const shouldBeChecked = o.getAttribute('data-correct')==='true';
+          const ok = input.checked === shouldBeChecked;
+          if(ok) earned += 1; else allOk = false;
+          o.classList.remove('state-correct','state-incorrect');
+          if(input.checked){ o.classList.add(shouldBeChecked ? 'state-correct' : 'state-incorrect'); }
+          else if(shouldBeChecked){ o.classList.add('state-incorrect'); }
+        });
+      });
+      groupCorrect = allOk;
+    }
+
+    const open = card.querySelector('textarea.open-answer');
+    if(open){ isOpenEnded = true; }
+
+    card.classList.remove('correct','incorrect','neutral');
+    if(groupTouched){
+      if(isOpenEnded){ card.classList.add('neutral'); }
+      else { card.classList.add(groupCorrect ? 'correct' : 'incorrect'); }
+    }
+  });
+
+  updateProgress();
+
+  const pct = Math.round((earned/possible)*100);
+  const resultPanel = document.getElementById('resultPanel');
+  document.getElementById('resultScore').textContent = earned+' / '+possible+' điểm';
+  let emoji, msg;
+  if(pct >= 90){ emoji='🌟'; msg='giỏi quá, em tìm thấy thật nhiều niềm vui!'; }
+  else if(pct >= 70){ emoji='🌈'; msg='làm rất tốt, tiếp tục phát huy nhé!'; }
+  else if(pct >= 50){ emoji='🙂'; msg='khá lắm, xem lại vài câu để giỏi hơn nữa nhé.'; }
+  else { emoji='🌤️'; msg='đừng lo, hãy đọc lại bài và thử lần nữa nhé!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMsg').textContent = nameInput.value.trim()+' ơi, '+msg;
+  resultPanel.classList.add('show');
+  resultPanel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('retryBtn').addEventListener('click', ()=>{
+  document.getElementById('studentName').value='';
+  document.getElementById('studentName').style.borderColor='#eaeff6';
+  document.getElementById('studentName').placeholder='Nhập họ và tên của em...';
+  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+  document.querySelectorAll('select').forEach(s=>{s.value='';s.style.borderColor='';});
+  document.querySelectorAll('textarea.open-answer').forEach(t=>t.value='');
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked'));
+  document.querySelectorAll('.check-opt').forEach(o=>o.classList.remove('state-correct','state-incorrect'));
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('correct','incorrect','neutral'));
+  document.getElementById('resultPanel').classList.remove('show');
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+updateProgress();
+</script>
+</body>
+</html>
