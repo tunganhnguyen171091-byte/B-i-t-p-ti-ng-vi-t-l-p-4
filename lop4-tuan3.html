@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Câu chuyện của cành nhỏ — Bài tập Tiếng Việt Lớp 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#eaf3ff;
+    --leaf:#5fb87b; --leaf-deep:#3f9760;
+    --grape:#9b6fc9; --grape-deep:#7c4fae;
+    --sun:#ffc93c; --sun-deep:#ffab00;
+    --coral:#ff7a6e; --coral-deep:#e35b4d;
+    --rain:#5aa4d6;
+    --ink:#2d3142; --ink-soft:#5a5f75;
+    --paper:#ffffff; --radius:22px;
+    --shadow:0 10px 26px rgba(45,49,66,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:'Quicksand',sans-serif;color:var(--ink);
+    background:
+      radial-gradient(circle at 10% 6%, #eafbf1 0%, transparent 45%),
+      radial-gradient(circle at 92% 6%, #f2e9ff 0%, transparent 42%),
+      linear-gradient(180deg, var(--sky) 0%, #f3fbf6 55%, #fdf9ef 100%);
+    min-height:100vh;padding-bottom:60px;
+  }
+  h1,h2,h3{font-family:'Baloo 2',sans-serif;}
+
+  .hero{text-align:center;padding:36px 18px 20px;}
+  .hero-badge{
+    display:inline-block;background:var(--paper);border:2px dashed var(--grape);
+    color:var(--grape-deep);font-weight:700;font-size:14px;padding:6px 16px;
+    border-radius:999px;margin-bottom:14px;
+  }
+  .hero h1{font-size:clamp(26px,5.8vw,42px);margin:0 0 8px;line-height:1.15;}
+  .hero h1 span{color:var(--grape-deep);}
+  .hero p.sub{max-width:520px;margin:0 auto;color:var(--ink-soft);font-weight:600;font-size:15.5px;}
+
+  .chibi-row{display:flex;justify-content:center;gap:14px;margin-top:18px;flex-wrap:wrap;}
+  .chibi-row svg{width:96px;height:96px;filter:drop-shadow(0 6px 10px rgba(45,49,66,0.12));}
+
+  .name-card{
+    max-width:400px;margin:22px auto 0;background:var(--paper);border-radius:18px;
+    box-shadow:var(--shadow);padding:16px 20px;border:2px solid #d9c4f5;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .name-card label{font-weight:700;font-size:14px;color:var(--grape-deep);display:flex;align-items:center;gap:6px;}
+  .name-card input{border:2px solid #eaeff6;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:16px;color:var(--ink);}
+  .name-card input:focus{outline:none;border-color:var(--sun-deep);}
+
+  .progress-wrap{max-width:640px;margin:26px auto 0;padding:0 18px;}
+  .progress-label{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:8px;}
+  #progress-count{color:var(--grape-deep);font-size:16px;}
+  .progress-track{position:relative;height:34px;border-radius:999px;background:linear-gradient(90deg,#dcecff,#eaf3ff);border:2px solid #d3e4f5;overflow:hidden;box-shadow:inset 0 2px 5px rgba(45,49,66,0.08);}
+  .progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--rain),var(--leaf) 60%,var(--sun) 100%);border-radius:999px;transition:width .5s cubic-bezier(.4,1.4,.6,1);}
+  .progress-walker{position:absolute;top:50%;transform:translate(-50%,-50%);left:0%;font-size:20px;transition:left .5s cubic-bezier(.4,1.4,.6,1);filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));}
+
+  .wrap{max-width:640px;margin:32px auto 0;padding:0 18px;display:flex;flex-direction:column;gap:22px;}
+
+  .story-card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 24px;position:relative;border-top:6px solid var(--leaf-deep);}
+  .story-card h2{margin:0 0 4px;font-size:22px;color:var(--leaf-deep);display:flex;align-items:center;gap:8px;}
+  .story-card .story-meta{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:14px;}
+  .story-card p{line-height:1.75;font-size:15.5px;margin:0 0 12px;color:#3a3f52;}
+  .story-card p:first-of-type::first-letter{font-family:'Baloo 2',sans-serif;font-size:44px;color:var(--grape-deep);float:left;line-height:0.8;padding-right:8px;padding-top:4px;}
+  .story-illustration{display:flex;justify-content:center;margin:6px 0 14px;}
+  .story-illustration svg{width:180px;height:120px;}
+
+  .q-card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 24px;border:2px solid transparent;transition:border-color .25s;scroll-margin-top:20px;}
+  .q-card.correct{border-color:var(--leaf) !important;background:#f1faf4;}
+  .q-card.incorrect{border-color:var(--coral) !important;background:#fff4f3;}
+
+  .q-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+  .q-num{width:34px;height:34px;border-radius:50%;background:var(--sun);color:#7a4b00;font-family:'Baloo 2',sans-serif;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex:none;}
+  .q-tag{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#f0e8fb;color:var(--grape-deep);letter-spacing:.3px;}
+  .q-tag.tag-fill{background:#fff0e0;color:#b5610a;}
+  .q-text{font-weight:700;font-size:16px;margin:0 0 14px;color:var(--ink);line-height:1.5;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#f7f9fc;border:2px solid #eaeff6;cursor:pointer;transition:all .15s;font-weight:600;font-size:15px;}
+  .opt:hover{background:#f2ecfb;border-color:#d3bdf2;}
+  .opt input{accent-color:var(--grape);width:18px;height:18px;flex:none;}
+  .opt.picked{background:#fff2d6;border-color:var(--sun-deep);}
+  .q-card.correct .opt.picked{background:#dcf5e9;border-color:var(--leaf);}
+  .q-card.incorrect .opt.picked{background:#ffe1de;border-color:var(--coral);}
+  .q-card.incorrect .opt.correct-answer{background:#dcf5e9;border-color:var(--leaf);}
+
+  .fill-line{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px;line-height:1.9;}
+  .fill-line .txt{font-weight:600;font-size:15px;}
+  .fill-line input[type=text]{border:none;border-bottom:3px dotted #b9c3d4;background:transparent;font-family:'Quicksand',sans-serif;font-weight:700;font-size:15px;color:var(--grape-deep);padding:4px 6px;min-width:130px;text-align:center;}
+  .fill-line input[type=text]:focus{outline:none;border-bottom-color:var(--sun-deep);}
+  .word-bank{margin-top:6px;background:#fbf7ff;border:2px dashed #d9c4f5;border-radius:14px;padding:10px 14px;font-size:13.5px;color:#6b4a99;font-weight:600;}
+
+  .short-answer{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+  .short-answer .txt{font-weight:700;font-size:15px;}
+  .short-answer input[type=text]{border:2px solid #eaeff6;border-radius:12px;padding:9px 12px;font-family:'Quicksand',sans-serif;font-weight:600;font-size:14.5px;color:var(--ink);}
+  .short-answer input[type=text]:focus{outline:none;border-color:var(--sun-deep);}
+
+  .feedback{margin-top:14px;padding:12px 14px;border-radius:14px;font-size:14px;font-weight:600;display:none;line-height:1.6;}
+  .q-card.correct .feedback{display:block;background:#e4f7ee;color:#1d7a52;}
+  .q-card.incorrect .feedback{display:block;background:#ffe9e6;color:#b3392a;}
+
+  .submit-zone{position:sticky;bottom:14px;display:flex;justify-content:center;margin-top:6px;z-index:20;}
+  .btn-submit{background:linear-gradient(135deg,var(--grape),var(--grape-deep));color:#fff;border:none;padding:16px 38px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:700;box-shadow:0 10px 22px rgba(124,79,174,.35);cursor:pointer;transition:transform .15s;}
+  .btn-submit:hover{transform:translateY(-2px) scale(1.02);}
+  .btn-submit:active{transform:translateY(0) scale(.98);}
+
+  .result-panel{background:linear-gradient(160deg,#fff,#f3fbf6);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 24px;text-align:center;border-top:6px solid var(--leaf);display:none;}
+  .result-panel.show{display:block;animation:pop .5s;}
+  @keyframes pop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .result-emoji{font-size:52px;margin-bottom:6px;}
+  .result-score{font-family:'Baloo 2',sans-serif;font-size:46px;color:var(--grape-deep);margin:4px 0;}
+  .result-msg{font-weight:700;font-size:17px;color:var(--ink);margin-bottom:16px;}
+  .btn-retry{background:var(--leaf-deep);color:#fff;border:none;padding:12px 28px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:700;cursor:pointer;}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:28px;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-badge">TIẾNG VIỆT · LỚP 4 · TUẦN 3</span>
+  <h1>Câu chuyện của <span>cành nhỏ</span></h1>
+  <p class="sub">Đọc câu chuyện, rồi trả lời các câu hỏi bên dưới nhé. Cùng cành nho bé nhỏ vượt qua giông bão nào!</p>
+
+  <div class="chibi-row" aria-hidden="true">
+    <!-- Chibi vine character 1 - worried -->
+    <svg viewBox="0 0 100 100">
+      <ellipse cx="50" cy="88" rx="22" ry="6" fill="#000" opacity="0.07"/>
+      <path d="M50 78c-16 0-26-13-26-30 0-15 10-28 26-28s26 13 26 28c0 17-10 30-26 30z" fill="#8fd19e"/>
+      <path d="M30 45c-6-4-9-12-6-19M70 45c6-4 9-12 6-19" stroke="#5fb87b" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <circle cx="41" cy="46" r="5" fill="#2d3142"/>
+      <circle cx="59" cy="46" r="5" fill="#2d3142"/>
+      <circle cx="42.5" cy="44.5" r="1.6" fill="#fff"/>
+      <circle cx="60.5" cy="44.5" r="1.6" fill="#fff"/>
+      <path d="M42 60c3 4 13 4 16 0" stroke="#2d3142" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="33" cy="54" rx="4.5" ry="3" fill="#ff9d9d" opacity=".7"/>
+      <ellipse cx="67" cy="54" rx="4.5" ry="3" fill="#ff9d9d" opacity=".7"/>
+    </svg>
+    <!-- Chibi vine character 2 - reaching out to help -->
+    <svg viewBox="0 0 100 100">
+      <ellipse cx="50" cy="88" rx="22" ry="6" fill="#000" opacity="0.07"/>
+      <path d="M50 78c-16 0-26-13-26-30 0-15 10-28 26-28s26 13 26 28c0 17-10 30-26 30z" fill="#c7a6ec"/>
+      <path d="M22 40c-8 0-13 6-13 13M78 40c8 0 13 6 13 13" stroke="#9b6fc9" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <circle cx="41" cy="46" r="5" fill="#2d3142"/>
+      <circle cx="59" cy="46" r="5" fill="#2d3142"/>
+      <circle cx="42.5" cy="44.5" r="1.6" fill="#fff"/>
+      <circle cx="60.5" cy="44.5" r="1.6" fill="#fff"/>
+      <path d="M40 59c4 5 16 5 20 0" stroke="#2d3142" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="32" cy="54" rx="4.5" ry="3" fill="#ff9d9d" opacity=".7"/>
+      <ellipse cx="68" cy="54" rx="4.5" ry="3" fill="#ff9d9d" opacity=".7"/>
+    </svg>
+    <!-- Chibi sun peeking after storm -->
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="55" r="26" fill="#ffd76b"/>
+      <path d="M50 15v10M50 85v10M15 50h10M85 50h10M25 25l7 7M75 75l-7-7M75 25l-7 7M25 75l7-7" stroke="#ffab00" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="42" cy="53" r="3.4" fill="#2d3142"/>
+      <circle cx="58" cy="53" r="3.4" fill="#2d3142"/>
+      <path d="M40 63c4 5 16 5 20 0" stroke="#2d3142" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="35" cy="59" rx="3.5" ry="2.3" fill="#ff9d9d" opacity=".7"/>
+      <ellipse cx="65" cy="59" rx="3.5" ry="2.3" fill="#ff9d9d" opacity=".7"/>
+    </svg>
+  </div>
+</div>
+
+<div class="name-card">
+  <label for="studentName">✏️ Họ và tên của con là gì?</label>
+  <input type="text" id="studentName" placeholder="Nhập họ và tên của em...">
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Cùng nhau vượt bão</span><span id="progress-count">0 / 6 câu</span></div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-walker" id="progress-walker">🌱</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- STORY -->
+  <div class="story-card">
+    <h2>📖 Câu chuyện của cành nhỏ</h2>
+    <div class="story-meta">(Theo Hạt giống tâm hồn)</div>
+    <div class="story-illustration">
+      <svg viewBox="0 0 220 140">
+        <path d="M110 130V60" stroke="#5fb87b" stroke-width="5" stroke-linecap="round"/>
+        <path d="M60 110c10-20 30-30 50-30M160 110c-10-20-30-30-50-30" stroke="#5fb87b" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="55" cy="105" rx="14" ry="9" fill="#8fd19e" transform="rotate(-20 55 105)"/>
+        <ellipse cx="165" cy="105" rx="14" ry="9" fill="#c7a6ec" transform="rotate(20 165 105)"/>
+        <circle cx="110" cy="45" r="20" fill="#ffd76b"/>
+        <path d="M110 15v8M110 72v8M80 45h8M132 45h8" stroke="#ffab00" stroke-width="3" stroke-linecap="round"/>
+        <path d="M40 60l4 10M180 60l-4 10M30 80l6 8M190 80l-6 8" stroke="#5aa4d6" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      </svg>
+    </div>
+    <p>Một cành nho mảnh mai lớn lên nhờ những dòng nước khoáng tinh khiết từ lòng đất. Nó thật trẻ trung, khoẻ mạnh và đầy sức sống. Nó cảm thấy rất tự tin khi tất cả chỉ dựa vào chính bản thân nó.</p>
+    <details class="story-toggle">
+      <summary style="cursor:pointer;font-weight:700;color:var(--grape-deep);">▶ Đọc tiếp câu chuyện</summary>
+      <p>Nhưng một ngày kia, bão lốc tràn về, gió thổi dữ dội, mưa không ngớt, cành nho bé nhỏ đã bị quật ngã. Nó rũ xuống, yếu ớt và đau đớn. Cành nho đã kiệt sức. Bỗng nó nghe thấy tiếng gọi của một cành nho khác: — Hãy lại đây và nắm lấy tay tôi.</p>
+      <p>Cành nho do dự trước đề nghị ấy. Từ trước đến giờ, cành nho bé nhỏ đã quen tự giải quyết mọi khó khăn một mình. Nhưng lần này nó đã thật đuối sức... Nó ngước nhìn cành nho kia với vẻ dè dặt và hoài nghi.</p>
+      <p>— Bạn đừng sợ, bạn chỉ cần quấn những sợi tua của bạn vào tôi là tôi có thể giúp bạn đứng thẳng dậy trong mưa bão. — Cành nho kia nói. Và cành nho bé nhỏ đã làm theo.</p>
+      <p>Gió vẫn dữ dội, mưa tầm tã và tuyết lạnh buốt ập vào. Nhưng cành nho bé nhỏ không còn đơn độc, lẻ loi nữa mà nó đã cùng chịu đựng với những cành nho khác. Và mặc dù những cành nho bị gió thổi lắc lư, chúng vẫn tựa vào nhau như không sợ bất cứ điều gì.</p>
+    </details>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" data-qid="q1">
+    <div class="q-top"><div class="q-num">1</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Chuyện gì xảy ra với cành nho bé nhỏ khi bão lốc tràn về?</p>
+    <div class="options" data-type="mc" data-correct="a">
+      <label class="opt"><input type="radio" name="q1" value="a"> Bị quật ngã, rũ xuống, yếu ớt và đau đớn.</label>
+      <label class="opt"><input type="radio" name="q1" value="b"> Thích thú được tắm mát trong mưa.</label>
+      <label class="opt"><input type="radio" name="q1" value="c"> Bị gió bão làm bật rễ, cuốn đi rất xa.</label>
+    </div>
+    <div class="feedback" data-explain="Bài đọc nói cành nho 'bị quật ngã. Nó rũ xuống, yếu ớt và đau đớn' khi bão lốc tràn về."></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" data-qid="q2">
+    <div class="q-top"><div class="q-num">2</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Cành nho khác đã giúp đỡ cành nho bé nhỏ như thế nào?</p>
+    <div class="options" data-type="mc" data-correct="b">
+      <label class="opt"><input type="radio" name="q2" value="a"> Khuyên bạn hãy đứng vững, đừng run sợ.</label>
+      <label class="opt"><input type="radio" name="q2" value="b"> Để bạn quấn những sợi tua vào mình và giúp bạn đứng thẳng.</label>
+      <label class="opt"><input type="radio" name="q2" value="c"> Đỡ bạn nằm rạp mình xuống đất.</label>
+    </div>
+    <div class="feedback" data-explain="Cành nho kia nói: 'bạn chỉ cần quấn những sợi tua của bạn vào tôi là tôi có thể giúp bạn đứng thẳng dậy'."></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" data-qid="q3">
+    <div class="q-top"><div class="q-num">3</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Vì sao cành nho bé nhỏ vẫn vững vàng trước giông bão?</p>
+    <div class="options" data-type="mc" data-correct="c">
+      <label class="opt"><input type="radio" name="q3" value="a"> Nó trẻ trung, khoẻ mạnh và đầy sức sống.</label>
+      <label class="opt"><input type="radio" name="q3" value="b"> Nó rất tự tin, chỉ biết dựa vào chính bản thân mình.</label>
+      <label class="opt"><input type="radio" name="q3" value="c"> Nó biết đoàn kết, dựa vào những cành nho khác.</label>
+    </div>
+    <div class="feedback" data-explain="Nhờ quấn tua vào cành nho khác và cùng nhau chịu đựng, các cành nho đã tựa vào nhau vững vàng trước bão."></div>
+  </div>
+
+  <!-- Q4 (converted to MC) -->
+  <div class="q-card" data-qid="q4">
+    <div class="q-top"><div class="q-num">4★</div><span class="q-tag">Trắc nghiệm</span></div>
+    <p class="q-text">Theo em, sau chuyện này, cành nho bé nhỏ sẽ nghĩ gì?</p>
+    <div class="options" data-type="mc" data-correct="A">
+      <label class="opt"><input type="radio" name="q4" value="A"> Từ nay, cần phải biết đoàn kết, dựa vào nhau để cùng vượt qua khó khăn.</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> Từ nay, chỉ nên tự mình giải quyết mọi việc, không cần nhờ ai giúp.</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> Từ nay, nên tránh xa những cành nho khác để không bị vướng vào rắc rối.</label>
+      <label class="opt"><input type="radio" name="q4" value="D"> Từ nay, không cần lo lắng vì bão tố sẽ không bao giờ quay trở lại nữa.</label>
+    </div>
+    <div class="feedback" data-explain="Sau khi được giúp đỡ và cùng nhau vượt bão, cành nho bé nhỏ chắc chắn sẽ hiểu ra giá trị của sự đoàn kết, sẻ chia."></div>
+  </div>
+
+  <!-- Q5 fill -->
+  <div class="q-card" data-qid="q5">
+    <div class="q-top"><div class="q-num">5</div><span class="q-tag tag-fill">Điền từ</span></div>
+    <p class="q-text">Chọn cụm từ thích hợp điền vào chỗ trống:</p>
+    <div class="word-bank">Ngân hàng từ: lá lành đùm lá rách, môi hở răng lạnh, nhường cơm sẻ áo</div>
+    <div class="fill-group" data-type="fill" style="margin-top:12px;">
+      <div class="fill-line"><span class="txt">a) Dù nghèo nhưng mẹ vẫn dạy Lan biết</span><input type="text" data-key="f1" data-answers="nhường cơm sẻ áo"><span class="txt">cho những người gặp khó khăn, hoạn nạn.</span></div>
+      <div class="fill-line"><span class="txt">b) Người may mắn giúp đỡ người bất hạnh — đó là tinh thần</span><input type="text" data-key="f2" data-answers="lá lành đùm lá rách"><span class="txt">của dân tộc ta từ đời xưa.</span></div>
+      <div class="fill-line"><span class="txt">c) Bà tôi thường bảo: "</span><input type="text" data-key="f3" data-answers="môi hở răng lạnh"><span class="txt">nên anh em các cháu phải biết yêu thương, bảo ban nhau."</span></div>
+    </div>
+    <div class="feedback" data-explain="nhường cơm sẻ áo · lá lành đùm lá rách · môi hở răng lạnh."></div>
+  </div>
+
+  <!-- Q6 short answer -->
+  <div class="q-card" data-qid="q6">
+    <div class="q-top"><div class="q-num">6★</div><span class="q-tag tag-fill">Trả lời ngắn</span></div>
+    <p class="q-text">Ghi lại nghĩa của mỗi từ sau (viết ngắn gọn bằng lời của em):</p>
+    <div class="fill-group" data-type="short">
+      <div class="short-answer"><span class="txt">a) Ăn mặc: có nghĩa là...</span><input type="text" data-key="s1" data-contains="trang phục|quần áo|y phục|mặc"></div>
+      <div class="short-answer"><span class="txt">b) Ăn nói: có nghĩa là...</span><input type="text" data-key="s2" data-contains="nói năng|giao tiếp|lời nói|ăn nói"></div>
+      <div class="short-answer"><span class="txt">c) Ăn ở: có nghĩa là...</span><input type="text" data-key="s3" data-contains="cư xử|đối xử|sinh hoạt|nếp sống"></div>
+    </div>
+    <div class="feedback" data-explain="Gợi ý: Ăn mặc = cách lựa chọn trang phục, quần áo. Ăn nói = cách nói năng, giao tiếp. Ăn ở = cách cư xử, đối xử với mọi người trong sinh hoạt hằng ngày."></div>
+  </div>
+
+</div>
+
+<div class="wrap">
+  <div class="submit-zone">
+    <button class="btn-submit" id="submitBtn">🎉 Nộp bài</button>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-emoji" id="resultEmoji">🌤️</div>
+    <div class="result-score" id="resultScore">0 / 15 điểm</div>
+    <div class="result-msg" id="resultMsg">Bão đã tan rồi!</div>
+    <button class="btn-retry" id="retryBtn">↺ Làm lại</button>
+  </div>
+</div>
+
+<footer>Được tạo tự động từ đề "Lớp 4 – Tuần 3" · Chúc em học vui! 🍇</footer>
+
+<script>
+const qCards = Array.from(document.querySelectorAll('.q-card'));
+const totalGroups = qCards.length;
+
+function normalize(s){ return (s||'').trim().toLowerCase().replace(/[.,!?;:"']/g,'').replace(/\s+/g,' '); }
+
+function updateProgress(){
+  let answered = 0;
+  qCards.forEach(card=>{ if(isGroupTouched(card)) answered++; });
+  const pct = Math.round((answered/totalGroups)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-walker').style.left = pct+'%';
+  document.getElementById('progress-count').textContent = answered+' / '+totalGroups+' câu';
+}
+
+function isGroupTouched(card){
+  const mc = card.querySelector('.options[data-type="mc"]');
+  if(mc){ return !!mc.querySelector('input:checked'); }
+  const fillGroup = card.querySelector('.fill-group[data-type="fill"]');
+  if(fillGroup){ return Array.from(fillGroup.querySelectorAll('input[type=text]')).some(i=>i.value.trim()!==''); }
+  const shortGroup = card.querySelector('.fill-group[data-type="short"]');
+  if(shortGroup){ return Array.from(shortGroup.querySelectorAll('input[type=text]')).some(i=>i.value.trim()!==''); }
+  return false;
+}
+
+qCards.forEach(card=>{
+  card.addEventListener('change', ()=>{
+    card.querySelectorAll('.opt').forEach(o=>{
+      const input = o.querySelector('input');
+      o.classList.toggle('picked', input.checked);
+    });
+    updateProgress();
+  });
+  card.addEventListener('input', updateProgress);
+});
+
+document.getElementById('submitBtn').addEventListener('click', ()=>{
+  const nameInput = document.getElementById('studentName');
+  if(nameInput.value.trim()===''){
+    nameInput.style.borderColor = 'var(--coral)';
+    nameInput.focus();
+    nameInput.placeholder = 'Em nhớ điền tên trước khi nộp bài nhé!';
+    return;
+  }
+  nameInput.style.borderColor = '#eaeff6';
+
+  let earned = 0, possible = 0;
+
+  qCards.forEach(card=>{
+    let groupCorrect = true;
+    let groupTouched = isGroupTouched(card);
+
+    const mc = card.querySelector('.options[data-type="mc"]');
+    if(mc){
+      possible += 1;
+      const checked = mc.querySelector('input:checked');
+      const correctVal = mc.getAttribute('data-correct');
+      const isCorrect = checked && checked.value === correctVal;
+      if(isCorrect) earned += 1;
+      mc.querySelectorAll('.opt').forEach(o=>{
+        const input = o.querySelector('input');
+        if(input.value === correctVal) o.classList.add('correct-answer');
+      });
+      groupCorrect = !!isCorrect;
+    }
+
+    const fillGroup = card.querySelector('.fill-group[data-type="fill"]');
+    if(fillGroup){
+      const inputs = Array.from(fillGroup.querySelectorAll('input[type=text]'));
+      possible += inputs.length;
+      let allOk = true;
+      inputs.forEach(inp=>{
+        const accepted = (inp.getAttribute('data-answers')||'').split('|').map(normalize);
+        const ok = accepted.includes(normalize(inp.value));
+        if(ok) earned += 1; else allOk = false;
+        inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e35b4d');
+        inp.style.borderBottomColor = inp.value.trim()==='' ? '#b9c3d4' : (ok ? '#3fb083' : '#ff7a6e');
+      });
+      groupCorrect = allOk;
+    }
+
+    const shortGroup = card.querySelector('.fill-group[data-type="short"]');
+    if(shortGroup){
+      const inputs = Array.from(shortGroup.querySelectorAll('input[type=text]'));
+      possible += inputs.length;
+      let allOk = true;
+      inputs.forEach(inp=>{
+        const keywords = (inp.getAttribute('data-contains')||'').split('|').map(normalize);
+        const val = normalize(inp.value);
+        const ok = val!=='' && keywords.some(k=>val.includes(k));
+        if(ok) earned += 1; else allOk = false;
+        inp.style.borderColor = inp.value.trim()==='' ? '#eaeff6' : (ok ? '#3fb083' : '#ff7a6e');
+      });
+      groupCorrect = allOk;
+    }
+
+    card.classList.remove('correct','incorrect');
+    if(groupTouched){ card.classList.add(groupCorrect ? 'correct' : 'incorrect'); }
+  });
+
+  updateProgress();
+
+  const pct = Math.round((earned/possible)*100);
+  const resultPanel = document.getElementById('resultPanel');
+  document.getElementById('resultScore').textContent = earned+' / '+possible+' điểm';
+  let emoji, msg;
+  if(pct >= 90){ emoji='🌞'; msg='giỏi quá, bão tan hết rồi!'; }
+  else if(pct >= 70){ emoji='🌤️'; msg='làm rất tốt, gần vượt qua cơn bão rồi!'; }
+  else if(pct >= 50){ emoji='⛅'; msg='khá lắm, xem lại vài câu để giỏi hơn nữa nhé.'; }
+  else { emoji='🌧️'; msg='đừng lo, hãy đọc lại bài và thử lần nữa nhé!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMsg').textContent = nameInput.value.trim()+' ơi, '+msg;
+  resultPanel.classList.add('show');
+  resultPanel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('retryBtn').addEventListener('click', ()=>{
+  document.getElementById('studentName').value='';
+  document.getElementById('studentName').style.borderColor='#eaeff6';
+  document.getElementById('studentName').placeholder='Nhập họ và tên của em...';
+  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  document.querySelectorAll('input[type=text]').forEach(i=>{i.value='';i.style.color='';i.style.borderBottomColor='';i.style.borderColor='';});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked'));
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('correct','incorrect'));
+  document.getElementById('resultPanel').classList.remove('show');
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+updateProgress();
+</script>
+</body>
+</html>
