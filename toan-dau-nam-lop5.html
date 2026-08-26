@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đề kiểm tra Toán đầu năm — Vào lớp 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#3d8bff; --blue-deep:#2662cc;
+    --orange:#ff9f40; --orange-deep:#e87e1e;
+    --green:#3fc17d; --green-deep:#2ea364;
+    --purple:#a473e6; --purple-deep:#8452c9;
+    --pink:#ff6fa5;
+    --coral:#ff7a6e; --coral-deep:#e35b4d;
+    --ink:#26324a; --ink-soft:#5c6b82;
+    --paper:#ffffff; --radius:22px;
+    --shadow:0 10px 26px rgba(38,50,74,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:'Quicksand',sans-serif;color:var(--ink);
+    background:
+      radial-gradient(circle at 8% 6%, #e7f1ff 0%, transparent 45%),
+      radial-gradient(circle at 94% 4%, #fff3e2 0%, transparent 42%),
+      radial-gradient(circle at 50% 95%, #eefaf1 0%, transparent 40%),
+      linear-gradient(180deg, #fbfdff 0%, #fefaf3 100%);
+    min-height:100vh;padding-bottom:60px;
+  }
+  h1,h2,h3{font-family:'Baloo 2',sans-serif;}
+
+  .hero{text-align:center;padding:34px 18px 18px;}
+  .hero-badge{display:inline-block;background:var(--paper);border:2px dashed var(--blue-deep);color:var(--blue-deep);font-weight:700;font-size:13.5px;padding:6px 16px;border-radius:999px;margin-bottom:14px;}
+  .hero h1{font-size:clamp(24px,5.4vw,38px);margin:0 0 8px;line-height:1.2;}
+  .hero h1 span{color:var(--orange-deep);}
+  .hero p.sub{max-width:520px;margin:0 auto;color:var(--ink-soft);font-weight:600;font-size:15px;}
+
+  .chibi-row{display:flex;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .chibi-row svg{width:64px;height:64px;filter:drop-shadow(0 6px 10px rgba(38,50,74,0.12));}
+
+  .info-card{max-width:460px;margin:22px auto 0;background:var(--paper);border-radius:18px;box-shadow:var(--shadow);padding:16px 20px;border:2px solid #d3e3ff;display:flex;flex-direction:column;gap:12px;}
+  .info-row{display:flex;flex-direction:column;gap:6px;}
+  .info-row label{font-weight:700;font-size:14px;color:var(--blue-deep);display:flex;align-items:center;gap:6px;}
+  .info-row input{border:2px solid #eaeff6;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:15px;color:var(--ink);}
+  .info-row input:focus{outline:none;border-color:var(--orange-deep);}
+  .info-two{display:flex;gap:10px;}
+  .info-two .info-row{flex:1;}
+
+  .progress-wrap{max-width:640px;margin:24px auto 0;padding:0 18px;}
+  .progress-label{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:8px;}
+  #progress-count{color:var(--blue-deep);font-size:16px;}
+  .progress-track{position:relative;height:34px;border-radius:999px;background:linear-gradient(90deg,#e2edff,#f2f8ff);border:2px solid #cfe0ff;overflow:hidden;box-shadow:inset 0 2px 5px rgba(38,50,74,0.08);}
+  .progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--blue),var(--purple) 55%,var(--pink) 100%);border-radius:999px;transition:width .5s cubic-bezier(.4,1.4,.6,1);}
+  .progress-walker{position:absolute;top:50%;transform:translate(-50%,-50%);left:0%;font-size:20px;transition:left .5s cubic-bezier(.4,1.4,.6,1);filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));}
+
+  .wrap{max-width:640px;margin:30px auto 0;padding:0 18px;display:flex;flex-direction:column;gap:20px;}
+
+  .q-card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 24px;border:2px solid transparent;transition:border-color .25s;scroll-margin-top:20px;}
+  .q-card.correct{border-color:var(--green) !important;background:#f0faf4;}
+  .q-card.incorrect{border-color:var(--coral) !important;background:#fff4f3;}
+
+  .q-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+  .q-num{width:38px;height:38px;border-radius:12px;background:var(--orange);color:#fff;font-family:'Baloo 2',sans-serif;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex:none;}
+  .q-tag{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#e5efff;color:var(--blue-deep);letter-spacing:.3px;}
+  .q-points{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--purple-deep);background:#f3ecff;padding:4px 10px;border-radius:999px;}
+  .q-text{font-weight:700;font-size:16px;margin:0 0 14px;color:var(--ink);line-height:1.5;}
+
+  .calc-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-weight:700;font-size:17px;font-family:'Baloo 2',sans-serif;color:var(--ink);}
+  .calc-row input[type=text]{width:130px;border:2px solid #e2edff;border-radius:12px;padding:8px 10px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:16px;color:var(--blue-deep);text-align:center;}
+  .calc-row input[type=text]:focus{outline:none;border-color:var(--orange-deep);}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;}
+  @media (max-width:480px){.calc-grid{grid-template-columns:1fr;}}
+
+  .fill-line{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px;line-height:1.9;font-weight:600;font-size:15.5px;}
+  .fill-line input[type=text]{border:none;border-bottom:3px dotted #c3cfe0;background:transparent;font-family:'Quicksand',sans-serif;font-weight:700;font-size:15.5px;color:var(--blue-deep);padding:4px 6px;min-width:120px;text-align:center;}
+  .fill-line input[type=text]:focus{outline:none;border-bottom-color:var(--orange-deep);}
+
+  .choice-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .choice-btn{padding:12px 22px;border-radius:14px;background:#f4f7fc;border:2px solid #e2edff;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:20px;cursor:pointer;color:var(--ink);transition:all .15s;}
+  .choice-btn:hover{background:#e9f1ff;border-color:#b9d3ff;}
+  .choice-btn.picked{background:#fff2d6;border-color:var(--orange-deep);}
+  .q-card.correct .choice-btn.picked{background:#dcf5e9;border-color:var(--green);}
+  .q-card.incorrect .choice-btn.picked{background:#ffe1de;border-color:var(--coral);}
+  .q-card.incorrect .choice-btn.correct-answer{background:#dcf5e9;border-color:var(--green);}
+
+  .illus-inline{display:flex;justify-content:center;margin-bottom:14px;}
+  .illus-inline svg{width:150px;height:100px;}
+
+  .feedback{margin-top:14px;padding:12px 14px;border-radius:14px;font-size:14px;font-weight:600;display:none;line-height:1.6;}
+  .q-card.correct .feedback{display:block;background:#e4f7ee;color:#1d7a52;}
+  .q-card.incorrect .feedback{display:block;background:#ffe9e6;color:#b3392a;}
+
+  .submit-zone{position:sticky;bottom:14px;display:flex;justify-content:center;margin-top:6px;z-index:20;}
+  .btn-submit{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;padding:16px 38px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:700;box-shadow:0 10px 22px rgba(38,98,204,.32);cursor:pointer;transition:transform .15s;}
+  .btn-submit:hover{transform:translateY(-2px) scale(1.02);}
+  .btn-submit:active{transform:translateY(0) scale(.98);}
+
+  .result-panel{background:linear-gradient(160deg,#fff,#f2f7ff);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 24px;text-align:center;border-top:6px solid var(--blue);display:none;}
+  .result-panel.show{display:block;animation:pop .5s;}
+  @keyframes pop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .result-emoji{font-size:52px;margin-bottom:6px;}
+  .result-score{font-family:'Baloo 2',sans-serif;font-size:44px;color:var(--blue-deep);margin:4px 0;}
+  .result-msg{font-weight:700;font-size:17px;color:var(--ink);margin-bottom:16px;}
+  .btn-retry{background:var(--purple-deep);color:#fff;border:none;padding:12px 28px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:700;cursor:pointer;}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:28px;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-badge">TOÁN · ĐỀ KIỂM TRA ĐẦU NĂM · VÀO LỚP 5</span>
+  <h1>Chinh phục <span>đề Toán</span> đầu năm</h1>
+  <p class="sub">Bình tĩnh đọc kỹ từng bài rồi làm nhé. Làm xong nhớ bấm "Nộp bài" để xem kết quả!</p>
+
+  <div class="chibi-row" aria-hidden="true">
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#3d8bff"/><text x="30" y="40" font-family="Baloo 2" font-size="28" fill="#fff" text-anchor="middle" font-weight="700">+</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#ff9f40"/><text x="30" y="40" font-family="Baloo 2" font-size="28" fill="#fff" text-anchor="middle" font-weight="700">−</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#3fc17d"/><text x="30" y="40" font-family="Baloo 2" font-size="26" fill="#fff" text-anchor="middle" font-weight="700">×</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#a473e6"/><text x="30" y="40" font-family="Baloo 2" font-size="26" fill="#fff" text-anchor="middle" font-weight="700">÷</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#ff6fa5"/><text x="30" y="40" font-family="Baloo 2" font-size="24" fill="#fff" text-anchor="middle" font-weight="700">=</text></svg>
+  </div>
+</div>
+
+<div class="info-card">
+  <div class="info-row"><label>✏️ Họ và tên</label><input type="text" id="studentName" placeholder="Nhập họ và tên của em..."></div>
+  <div class="info-two">
+    <div class="info-row"><label>🏫 Lớp</label><input type="text" id="studentClass" placeholder="VD: 4A"></div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Tiến độ làm bài</span><span id="progress-count">0 / 9 bài</span></div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-walker" id="progress-walker">🚀</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- Bài 1 -->
+  <div class="q-card" data-qid="b1">
+    <div class="q-top"><div class="q-num">1</div><span class="q-tag">Số tự nhiên</span><span class="q-points">1,0 điểm</span></div>
+    <p class="q-text">Cho số: 36 428 715</p>
+    <div class="fill-line"><span>a) Chữ số 6 trong số trên có giá trị là:</span><input type="text" data-key="a1" data-answers="6000000"></div>
+    <div class="fill-line"><span>b) Làm tròn số trên đến hàng trăm nghìn:</span><input type="text" data-key="a2" data-answers="36400000"></div>
+    <div class="feedback" data-explain="a) Chữ số 6 đứng ở hàng triệu nên có giá trị là 6 000 000. b) Hàng trăm nghìn là chữ số 4; chữ số liền sau (hàng chục nghìn) là 2 < 5 nên làm tròn xuống: 36 400 000."></div>
+  </div>
+
+  <!-- Bài 2 -->
+  <div class="q-card" data-qid="b2">
+    <div class="q-top"><div class="q-num">2</div><span class="q-tag">Sắp xếp</span><span class="q-points">0,5 điểm</span></div>
+    <p class="q-text">Sắp xếp các số sau theo thứ tự từ bé đến lớn: 502 430; 520 403; 502 403</p>
+    <div class="fill-line"><span>Thứ tự từ bé đến lớn:</span><input type="text" data-key="a3" style="min-width:280px;" data-answers="502403,502430,520403" placeholder="VD: 502403, 502430, 520403"></div>
+    <div class="feedback" data-explain="So sánh từng hàng: 502 403 < 502 430 < 520 403."></div>
+  </div>
+
+  <!-- Bài 3 -->
+  <div class="q-card" data-qid="b3">
+    <div class="q-top"><div class="q-num">3</div><span class="q-tag">Đặt tính rồi tính</span><span class="q-points">2,5 điểm</span></div>
+    <p class="q-text">Tính kết quả của mỗi phép tính sau:</p>
+    <div class="calc-grid">
+      <div class="calc-row">245 678 + 36 905 = <input type="text" data-key="c1" data-answers="282583"></div>
+      <div class="calc-row">900 000 − 472 638 = <input type="text" data-key="c2" data-answers="427362"></div>
+      <div class="calc-row">3 426 × 25 = <input type="text" data-key="c3" data-answers="85650"></div>
+      <div class="calc-row">57 456 : 24 = <input type="text" data-key="c4" data-answers="2394"></div>
+    </div>
+    <div class="feedback" data-explain="245 678 + 36 905 = 282 583 · 900 000 − 472 638 = 427 362 · 3 426 × 25 = 85 650 · 57 456 : 24 = 2 394."></div>
+  </div>
+
+  <!-- Bài 4 -->
+  <div class="q-card" data-qid="b4">
+    <div class="q-top"><div class="q-num">4</div><span class="q-tag">Tính giá trị biểu thức</span><span class="q-points">0,75 điểm</span></div>
+    <div class="calc-row">120 × 5 + 360 : 6 = <input type="text" data-key="a4" data-answers="660"></div>
+    <div class="feedback" data-explain="Nhân chia trước, cộng trừ sau: 120 × 5 = 600; 360 : 6 = 60; 600 + 60 = 660."></div>
+  </div>
+
+  <!-- Bài 5 -->
+  <div class="q-card" data-qid="b5">
+    <div class="q-top"><div class="q-num">5</div><span class="q-tag">Phân số</span><span class="q-points">1,25 điểm</span></div>
+    <p class="q-text">a) Điền dấu &gt;, &lt; hoặc = :</p>
+    <div class="calc-row" style="margin-bottom:18px;">3/4 <span class="choice-row" data-type="choice" data-correct=">">
+      <button type="button" class="choice-btn" data-val=">">&gt;</button>
+      <button type="button" class="choice-btn" data-val="<">&lt;</button>
+      <button type="button" class="choice-btn" data-val="=">=</button>
+    </span> 5/8</div>
+    <div class="fill-line"><span>b) Điền số thích hợp: 3/5 =</span><input type="text" data-key="a5" style="width:70px;min-width:70px;" data-answers="6"><span>/10</span></div>
+    <div class="feedback" data-explain="a) 3/4 = 6/8 > 5/8. b) 3/5 = 6/10 (nhân cả tử và mẫu với 2)."></div>
+  </div>
+
+  <!-- Bài 6 -->
+  <div class="q-card" data-qid="b6">
+    <div class="q-top"><div class="q-num">6</div><span class="q-tag">Đại lượng</span><span class="q-points">1,0 điểm</span></div>
+    <div class="fill-line"><span>3 tấn 25 kg =</span><input type="text" data-key="a6" data-answers="3025"><span>kg</span></div>
+    <div class="fill-line"><span>4 m² 50 dm² =</span><input type="text" data-key="a7" data-answers="450"><span>dm²</span></div>
+    <div class="feedback" data-explain="3 tấn = 3000 kg, cộng 25 kg = 3025 kg. 4 m² = 400 dm², cộng 50 dm² = 450 dm²."></div>
+  </div>
+
+  <!-- Bài 7 -->
+  <div class="q-card" data-qid="b7">
+    <div class="q-top"><div class="q-num">7</div><span class="q-tag">Hình học</span><span class="q-points">1,0 điểm</span></div>
+    <div class="illus-inline" aria-hidden="true">
+      <svg viewBox="0 0 200 120">
+        <rect x="30" y="30" width="140" height="60" fill="#eafaf1" stroke="#3fc17d" stroke-width="4"/>
+        <text x="100" y="24" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13" fill="#2ea364">12 m</text>
+        <text x="18" y="64" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13" fill="#2ea364" transform="rotate(-90 18 64)">7 m</text>
+      </svg>
+    </div>
+    <p class="q-text">Một mảnh vườn hình chữ nhật có chiều dài 12 m, chiều rộng 7 m.</p>
+    <div class="fill-line"><span>a) Chu vi mảnh vườn:</span><input type="text" data-key="a8" data-answers="38"><span>m</span></div>
+    <div class="fill-line"><span>b) Diện tích mảnh vườn:</span><input type="text" data-key="a9" data-answers="84"><span>m²</span></div>
+    <div class="feedback" data-explain="Chu vi = (12 + 7) × 2 = 38 m. Diện tích = 12 × 7 = 84 m²."></div>
+  </div>
+
+  <!-- Bài 8 -->
+  <div class="q-card" data-qid="b8">
+    <div class="q-top"><div class="q-num">8</div><span class="q-tag">Số liệu</span><span class="q-points">1,0 điểm</span></div>
+    <p class="q-text">Số cây ba lớp trồng được lần lượt là 120 cây; 150 cây; 135 cây. Trung bình mỗi lớp trồng được bao nhiêu cây?</p>
+    <div class="fill-line"><span>Đáp số:</span><input type="text" data-key="a10" data-answers="135"><span>cây</span></div>
+    <div class="feedback" data-explain="Trung bình = (120 + 150 + 135) : 3 = 405 : 3 = 135 cây."></div>
+  </div>
+
+  <!-- Bài 9 -->
+  <div class="q-card" data-qid="b9">
+    <div class="q-top"><div class="q-num">9</div><span class="q-tag">Giải toán</span><span class="q-points">1,0 điểm</span></div>
+    <p class="q-text">Một cửa hàng có 5 thùng sách, mỗi thùng 48 quyển. Cửa hàng đã bán 75 quyển. Hỏi cửa hàng còn lại bao nhiêu quyển sách?</p>
+    <div class="fill-line"><span>Đáp số:</span><input type="text" data-key="a11" data-answers="165"><span>quyển</span></div>
+    <div class="feedback" data-explain="Tổng số sách: 5 × 48 = 240 quyển. Số sách còn lại: 240 − 75 = 165 quyển."></div>
+  </div>
+
+</div>
+
+<div class="wrap">
+  <div class="submit-zone">
+    <button class="btn-submit" id="submitBtn">🎉 Nộp bài</button>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-emoji" id="resultEmoji">🏆</div>
+    <div class="result-score" id="resultScore">0 / 20 điểm</div>
+    <div class="result-msg" id="resultMsg">Cố gắng lên nhé!</div>
+    <button class="btn-retry" id="retryBtn">↺ Làm lại</button>
+  </div>
+</div>
+
+<footer>Đề kiểm tra Toán đầu năm — Vào lớp 5 · Chúc em làm bài tốt! 🧮</footer>
+
+<script>
+const qCards = Array.from(document.querySelectorAll('.q-card'));
+const totalGroups = qCards.length;
+
+function normNum(s){ return (s||'').toString().trim().replace(/[.\s]/g,'').replace(',', '.'); }
+function normList(s){ return (s||'').toString().split(/[,;]+/).map(x=>x.replace(/[^\d]/g,'').trim()).filter(x=>x!==''); }
+
+function updateProgress(){
+  let answered = 0;
+  qCards.forEach(card=>{ if(isGroupTouched(card)) answered++; });
+  const pct = Math.round((answered/totalGroups)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-walker').style.left = pct+'%';
+  document.getElementById('progress-count').textContent = answered+' / '+totalGroups+' bài';
+}
+
+function isGroupTouched(card){
+  const inputs = card.querySelectorAll('input[type=text]');
+  if(Array.from(inputs).some(i=>i.value.trim()!=='')) return true;
+  const choices = card.querySelectorAll('.choice-row[data-type="choice"]');
+  if(choices.length){ return Array.from(card.querySelectorAll('.choice-btn')).some(b=>b.classList.contains('picked')); }
+  return false;
+}
+
+qCards.forEach(card=>{
+  card.addEventListener('input', updateProgress);
+  card.querySelectorAll('.choice-row[data-type="choice"]').forEach(row=>{
+    row.querySelectorAll('.choice-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        row.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+        updateProgress();
+      });
+    });
+  });
+});
+
+document.getElementById('submitBtn').addEventListener('click', ()=>{
+  const nameInput = document.getElementById('studentName');
+  if(nameInput.value.trim()===''){
+    nameInput.style.borderColor = 'var(--coral)';
+    nameInput.focus();
+    nameInput.placeholder = 'Em nhớ điền tên trước khi nộp bài nhé!';
+    return;
+  }
+  nameInput.style.borderColor = '#eaeff6';
+
+  let earned = 0, possible = 0;
+
+  qCards.forEach(card=>{
+    let groupCorrect = true;
+    let groupTouched = isGroupTouched(card);
+
+    // list-type answers (Bài 2)
+    const listInputs = card.querySelectorAll('input[data-answers*=","]');
+    const handledKeys = new Set();
+
+    Array.from(listInputs).forEach(inp=>{
+      handledKeys.add(inp.getAttribute('data-key'));
+      possible += 1;
+      const expected = inp.getAttribute('data-answers').split(',').map(x=>x.trim());
+      const given = normList(inp.value);
+      const ok = expected.length===given.length && expected.every((v,i)=>v===given[i]);
+      if(ok) earned += 1; else groupCorrect = false;
+      inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e35b4d');
+      inp.style.borderBottomColor = inp.value.trim()==='' ? '#c3cfe0' : (ok ? '#3fc17d' : '#ff7a6e');
+    });
+
+    // plain numeric fill inputs
+    const numInputs = card.querySelectorAll('input[type=text][data-answers]:not([data-answers*=","])');
+    numInputs.forEach(inp=>{
+      if(handledKeys.has(inp.getAttribute('data-key'))) return;
+      possible += 1;
+      const expected = normNum(inp.getAttribute('data-answers'));
+      const given = normNum(inp.value);
+      const ok = given!=='' && given === expected;
+      if(ok) earned += 1; else groupCorrect = false;
+      inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e35b4d');
+      inp.style.borderBottomColor = inp.value.trim()==='' ? '#c3cfe0' : (ok ? '#3fc17d' : '#ff7a6e');
+    });
+
+    // choice buttons (>,<,=)
+    const choiceRows = card.querySelectorAll('.choice-row[data-type="choice"]');
+    choiceRows.forEach(row=>{
+      possible += 1;
+      const correctVal = row.getAttribute('data-correct');
+      const picked = row.querySelector('.choice-btn.picked');
+      const ok = picked && picked.getAttribute('data-val') === correctVal;
+      if(ok) earned += 1; else groupCorrect = false;
+      row.querySelectorAll('.choice-btn').forEach(b=>{
+        if(b.getAttribute('data-val')===correctVal) b.classList.add('correct-answer');
+      });
+    });
+
+    card.classList.remove('correct','incorrect');
+    if(groupTouched){ card.classList.add(groupCorrect ? 'correct' : 'incorrect'); }
+  });
+
+  updateProgress();
+
+  const pct = Math.round((earned/possible)*100);
+  const resultPanel = document.getElementById('resultPanel');
+  document.getElementById('resultScore').textContent = earned+' / '+possible+' điểm';
+  let emoji, msg;
+  if(pct >= 90){ emoji='🏆'; msg='xuất sắc, sẵn sàng vào lớp 5 rồi!'; }
+  else if(pct >= 70){ emoji='🌟'; msg='làm rất tốt, cố thêm chút nữa nhé!'; }
+  else if(pct >= 50){ emoji='🙂'; msg='khá lắm, xem lại vài bài để giỏi hơn nữa nhé.'; }
+  else { emoji='📘'; msg='đừng lo, hãy ôn lại và thử lần nữa nhé!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMsg').textContent = nameInput.value.trim()+' ơi, '+msg;
+  resultPanel.classList.add('show');
+  resultPanel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('retryBtn').addEventListener('click', ()=>{
+  document.getElementById('studentName').value='';
+  document.getElementById('studentName').style.borderColor='#eaeff6';
+  document.getElementById('studentName').placeholder='Nhập họ và tên của em...';
+  document.getElementById('studentClass').value='';
+  document.querySelectorAll('input[type=text]').forEach(i=>{ if(i.id!=='studentName' && i.id!=='studentClass'){ i.value=''; i.style.color=''; i.style.borderBottomColor=''; } });
+  document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('picked','correct-answer'));
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('correct','incorrect'));
+  document.getElementById('resultPanel').classList.remove('show');
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+updateProgress();
+</script>
+</body>
+</html>
