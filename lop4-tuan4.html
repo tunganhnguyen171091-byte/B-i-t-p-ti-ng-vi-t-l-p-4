@@ -157,6 +157,8 @@
 <div class="name-card">
   <label for="studentName">✏️ Họ và tên của con là gì?</label>
   <input type="text" id="studentName" placeholder="Nhập họ và tên của em...">
+  <label for="studentClass" style="margin-top:8px;">🏫 Con học lớp mấy?</label>
+  <input type="text" id="studentClass" placeholder="VD: 4A">
 </div>
 
 <div class="progress-wrap">
@@ -341,6 +343,15 @@ document.getElementById('submitBtn').addEventListener('click', ()=>{
   }
   nameInput.style.borderColor = '#eaeff6';
 
+  const classInput = document.getElementById('studentClass');
+  if(classInput.value.trim()===''){
+    classInput.style.borderColor = 'var(--coral)';
+    classInput.focus();
+    classInput.placeholder = 'Em nhớ điền lớp trước khi nộp bài nhé!';
+    return;
+  }
+  classInput.style.borderColor = '#eaeff6';
+
   let earned = 0, possible = 0;
 
   qCards.forEach(card=>{
@@ -397,6 +408,22 @@ document.getElementById('submitBtn').addEventListener('click', ()=>{
 
   updateProgress();
 
+  // Gửi kết quả về Google Sheet của giáo viên
+  try {
+    fetch("https://script.google.com/macros/s/AKfycbyvWKGiEadJZC0m2E_ETWm1oGUXTJ7RaNEGJkDT_TiX5UGxaav75rKJ0mN2OV-hQ4s/exec", {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify({
+        bai: "Tuần 4 - Suối nhỏ, hồ nước và biển",
+        hoten: nameInput.value.trim(),
+        lop: classInput.value.trim(),
+        diem: earned,
+        tongdiem: possible
+      })
+    }).catch(()=>{});
+  } catch(e) {}
+
   const pct = Math.round((earned/possible)*100);
   const resultPanel = document.getElementById('resultPanel');
   document.getElementById('resultScore').textContent = earned+' / '+possible+' điểm';
@@ -415,6 +442,9 @@ document.getElementById('retryBtn').addEventListener('click', ()=>{
   document.getElementById('studentName').value='';
   document.getElementById('studentName').style.borderColor='#eaeff6';
   document.getElementById('studentName').placeholder='Nhập họ và tên của em...';
+  document.getElementById('studentClass').value='';
+  document.getElementById('studentClass').style.borderColor='#eaeff6';
+  document.getElementById('studentClass').placeholder='VD: 4A';
   document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
   document.querySelectorAll('input[type=text]').forEach(i=>{i.value='';i.style.color='';i.style.borderBottomColor='';i.style.borderColor='';});
   document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked'));
