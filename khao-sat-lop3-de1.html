@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đề khảo sát Lớp 3 — Đề 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#3d8bff; --blue-deep:#2662cc;
+    --orange:#ff9f40; --orange-deep:#e87e1e;
+    --green:#3fc17d; --green-deep:#2ea364;
+    --purple:#a473e6; --purple-deep:#8452c9;
+    --pink:#ff6fa5;
+    --coral:#ff7a6e; --coral-deep:#e35b4d;
+    --ink:#26324a; --ink-soft:#5c6b82;
+    --paper:#ffffff; --radius:22px;
+    --shadow:0 10px 26px rgba(38,50,74,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:'Quicksand',sans-serif;color:var(--ink);
+    background:
+      radial-gradient(circle at 8% 6%, #e7f1ff 0%, transparent 45%),
+      radial-gradient(circle at 94% 4%, #fff3e2 0%, transparent 42%),
+      radial-gradient(circle at 50% 95%, #eefaf1 0%, transparent 40%),
+      linear-gradient(180deg, #fbfdff 0%, #fefaf3 100%);
+    min-height:100vh;padding-bottom:60px;
+  }
+  h1,h2,h3{font-family:'Baloo 2',sans-serif;}
+
+  .hero{text-align:center;padding:34px 18px 18px;}
+  .hero-badge{display:inline-block;background:var(--paper);border:2px dashed var(--blue-deep);color:var(--blue-deep);font-weight:700;font-size:13.5px;padding:6px 16px;border-radius:999px;margin-bottom:14px;}
+  .hero h1{font-size:clamp(24px,5.4vw,38px);margin:0 0 8px;line-height:1.2;}
+  .hero h1 span{color:var(--orange-deep);}
+  .hero p.sub{max-width:520px;margin:0 auto;color:var(--ink-soft);font-weight:600;font-size:15px;}
+
+  .chibi-row{display:flex;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .chibi-row svg{width:64px;height:64px;filter:drop-shadow(0 6px 10px rgba(38,50,74,0.12));}
+
+  .info-card{max-width:460px;margin:22px auto 0;background:var(--paper);border-radius:18px;box-shadow:var(--shadow);padding:16px 20px;border:2px solid #d3e3ff;display:flex;flex-direction:column;gap:12px;}
+  .info-row{display:flex;flex-direction:column;gap:6px;}
+  .info-row label{font-weight:700;font-size:14px;color:var(--blue-deep);display:flex;align-items:center;gap:6px;}
+  .info-row input{border:2px solid #eaeff6;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:15px;color:var(--ink);}
+  .info-row input:focus{outline:none;border-color:var(--orange-deep);}
+  .info-two{display:flex;gap:10px;}
+  .info-two .info-row{flex:1;}
+
+  .progress-wrap{max-width:640px;margin:24px auto 0;padding:0 18px;}
+  .progress-label{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:8px;}
+  #progress-count{color:var(--blue-deep);font-size:16px;}
+  .progress-track{position:relative;height:34px;border-radius:999px;background:linear-gradient(90deg,#e2edff,#f2f8ff);border:2px solid #cfe0ff;overflow:hidden;box-shadow:inset 0 2px 5px rgba(38,50,74,0.08);}
+  .progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--blue),var(--purple) 55%,var(--pink) 100%);border-radius:999px;transition:width .5s cubic-bezier(.4,1.4,.6,1);}
+  .progress-walker{position:absolute;top:50%;transform:translate(-50%,-50%);left:0%;font-size:20px;transition:left .5s cubic-bezier(.4,1.4,.6,1);filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));}
+
+  .wrap{max-width:640px;margin:30px auto 0;padding:0 18px;display:flex;flex-direction:column;gap:20px;}
+
+  .q-card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 24px;border:2px solid transparent;transition:border-color .25s;scroll-margin-top:20px;}
+  .q-card.correct{border-color:var(--green) !important;background:#f0faf4;}
+  .q-card.incorrect{border-color:var(--coral) !important;background:#fff4f3;}
+  .q-card.neutral{border-color:var(--purple) !important;background:#f7f2ff;}
+
+  .q-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+  .q-num{width:38px;height:38px;border-radius:12px;background:var(--orange);color:#fff;font-family:'Baloo 2',sans-serif;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex:none;}
+  .q-tag{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#e5efff;color:var(--blue-deep);letter-spacing:.3px;}
+  .q-points{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--purple-deep);background:#f3ecff;padding:4px 10px;border-radius:999px;}
+  .q-text{font-weight:700;font-size:16px;margin:0 0 14px;color:var(--ink);line-height:1.5;}
+
+  .calc-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-weight:700;font-size:17px;font-family:'Baloo 2',sans-serif;color:var(--ink);}
+  .calc-row input[type=text]{width:130px;border:2px solid #e2edff;border-radius:12px;padding:8px 10px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:16px;color:var(--blue-deep);text-align:center;}
+  .calc-row input[type=text]:focus{outline:none;border-color:var(--orange-deep);}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;}
+  @media (max-width:480px){.calc-grid{grid-template-columns:1fr;}}
+
+  .fill-line{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px;line-height:1.9;font-weight:600;font-size:15.5px;}
+  .fill-line input[type=text]{border:none;border-bottom:3px dotted #c3cfe0;background:transparent;font-family:'Quicksand',sans-serif;font-weight:700;font-size:15.5px;color:var(--blue-deep);padding:4px 6px;min-width:120px;text-align:center;}
+  .fill-line input[type=text]:focus{outline:none;border-bottom-color:var(--orange-deep);}
+
+  .choice-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .choice-btn{padding:12px 22px;border-radius:14px;background:#f4f7fc;border:2px solid #e2edff;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:20px;cursor:pointer;color:var(--ink);transition:all .15s;}
+  .choice-btn:hover{background:#e9f1ff;border-color:#b9d3ff;}
+  .choice-btn.picked{background:#fff2d6;border-color:var(--orange-deep);}
+  .q-card.correct .choice-btn.picked{background:#dcf5e9;border-color:var(--green);}
+  .q-card.incorrect .choice-btn.picked{background:#ffe1de;border-color:var(--coral);}
+  .q-card.incorrect .choice-btn.correct-answer{background:#dcf5e9;border-color:var(--green);}
+
+  .tf-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;padding:10px 12px;background:#f9fbff;border-radius:14px;border:2px solid #eef3fb;}
+  .tf-row .tf-text{flex:1;min-width:200px;font-weight:600;font-size:15px;color:var(--ink);}
+  .tf-btns{display:flex;gap:8px;flex:none;}
+  .tf-btn{padding:9px 16px;border-radius:12px;background:#fff;border:2px solid #e2edff;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:14px;cursor:pointer;color:var(--ink);}
+  .tf-btn:hover{background:#e9f1ff;}
+  .tf-btn.picked{background:#fff2d6;border-color:var(--orange-deep);}
+  .tf-row.correct .tf-btn.picked{background:#dcf5e9;border-color:var(--green);}
+  .tf-row.incorrect .tf-btn.picked{background:#ffe1de;border-color:var(--coral);}
+  .tf-row.incorrect .tf-btn.correct-answer{background:#dcf5e9;border-color:var(--green);}
+
+  .match-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .match-left{background:#f4f7fc;border:2px solid #e2edff;border-radius:12px;padding:9px 12px;font-weight:700;min-width:90px;flex:1;}
+  .match-row select{flex:1.4;min-width:150px;padding:9px 10px;border-radius:12px;border:2px solid #e2edff;background:#fff;font-family:'Quicksand',sans-serif;font-weight:600;font-size:14px;color:var(--ink);}
+  .match-row select:focus{outline:2px solid var(--orange-deep);}
+
+  .illus-inline{display:flex;justify-content:center;margin-bottom:14px;}
+  .illus-inline svg{width:150px;height:100px;}
+
+  .feedback{margin-top:14px;padding:12px 14px;border-radius:14px;font-size:14px;font-weight:600;display:none;line-height:1.6;}
+  .q-card.correct .feedback{display:block;background:#e4f7ee;color:#1d7a52;}
+  .q-card.incorrect .feedback{display:block;background:#ffe9e6;color:#b3392a;}
+  .q-card.neutral .feedback{display:block;background:#f0e8ff;color:#5f3ea8;}
+
+  .submit-zone{position:sticky;bottom:14px;display:flex;justify-content:center;margin-top:6px;z-index:20;}
+  .btn-submit{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;padding:16px 38px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:700;box-shadow:0 10px 22px rgba(38,98,204,.32);cursor:pointer;transition:transform .15s;}
+  .btn-submit:hover{transform:translateY(-2px) scale(1.02);}
+  .btn-submit:active{transform:translateY(0) scale(.98);}
+
+  .result-panel{background:linear-gradient(160deg,#fff,#f2f7ff);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 24px;text-align:center;border-top:6px solid var(--blue);display:none;}
+  .result-panel.show{display:block;animation:pop .5s;}
+  @keyframes pop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .result-emoji{font-size:52px;margin-bottom:6px;}
+  .result-score{font-family:'Baloo 2',sans-serif;font-size:44px;color:var(--blue-deep);margin:4px 0;}
+  .result-msg{font-weight:700;font-size:17px;color:var(--ink);margin-bottom:16px;}
+  .btn-retry{background:var(--purple-deep);color:#fff;border:none;padding:12px 28px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:700;cursor:pointer;}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:28px;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-badge">TOÁN · ĐỀ KHẢO SÁT · LỚP 3</span>
+  <h1>Đề khảo sát Lớp 3 — Đề 1</h1>
+  <p class="sub">Bình tĩnh đọc kỹ từng phần rồi làm nhé. Làm xong nhớ bấm "Nộp bài" để xem kết quả!</p>
+
+  <div class="chibi-row" aria-hidden="true">
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#3d8bff"/><text x="30" y="40" font-family="Baloo 2" font-size="28" fill="#fff" text-anchor="middle" font-weight="700">+</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#ff9f40"/><text x="30" y="40" font-family="Baloo 2" font-size="28" fill="#fff" text-anchor="middle" font-weight="700">−</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#3fc17d"/><text x="30" y="40" font-family="Baloo 2" font-size="26" fill="#fff" text-anchor="middle" font-weight="700">×</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#a473e6"/><text x="30" y="40" font-family="Baloo 2" font-size="26" fill="#fff" text-anchor="middle" font-weight="700">÷</text></svg>
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="#ff6fa5"/><text x="30" y="40" font-family="Baloo 2" font-size="24" fill="#fff" text-anchor="middle" font-weight="700">=</text></svg>
+  </div>
+</div>
+
+<div class="info-card">
+  <div class="info-row"><label>✏️ Họ và tên</label><input type="text" id="studentName" placeholder="Nhập họ và tên của em..."></div>
+  <div class="info-two">
+    <div class="info-row"><label>🏫 Lớp</label><input type="text" id="studentClass" placeholder="VD: 4A"></div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Tiến độ làm bài</span><span id="progress-count">0 / 9 bài</span></div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-walker" id="progress-walker">🚀</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+
+  <div style="text-align:center;"><span class="hero-badge" style="border-color:var(--purple-deep);color:var(--purple-deep);">PHẦN 1 · TRẮC NGHIỆM CHỌN ĐÁP ÁN (2 điểm)</span></div>
+
+  <div class="q-card" data-qid="c1">
+    <div class="q-top"><div class="q-num">1</div><span class="q-tag">Trắc nghiệm</span><span class="q-points">0,5 điểm</span></div>
+    <p class="q-text">Số lớn nhất trong các số 682; 468; 593; 891 là số:</p>
+    <div class="options" data-type="mc" data-correct="d">
+      <label class="opt"><input type="radio" name="c1" value="a"> A. 682</label>
+      <label class="opt"><input type="radio" name="c1" value="b"> B. 468</label>
+      <label class="opt"><input type="radio" name="c1" value="c"> C. 593</label>
+      <label class="opt"><input type="radio" name="c1" value="d"> D. 891</label>
+    </div>
+    <div class="feedback" data-explain="So sánh hàng trăm: 891 có hàng trăm lớn nhất (8), nên 891 là số lớn nhất."></div>
+  </div>
+
+  <div class="q-card" data-qid="c2">
+    <div class="q-top"><div class="q-num">2</div><span class="q-tag">Trắc nghiệm</span><span class="q-points">0,5 điểm</span></div>
+    <p class="q-text">Một ngày có mấy giờ?</p>
+    <div class="options" data-type="mc" data-correct="c">
+      <label class="opt"><input type="radio" name="c2" value="a"> A. 12 giờ</label>
+      <label class="opt"><input type="radio" name="c2" value="b"> B. 7 giờ</label>
+      <label class="opt"><input type="radio" name="c2" value="c"> C. 24 giờ</label>
+      <label class="opt"><input type="radio" name="c2" value="d"> D. 8 giờ</label>
+    </div>
+    <div class="feedback" data-explain="Một ngày có 24 giờ."></div>
+  </div>
+
+  <div class="q-card" data-qid="c3">
+    <div class="q-top"><div class="q-num">3</div><span class="q-tag">Trắc nghiệm</span><span class="q-points">0,5 điểm</span></div>
+    <p class="q-text">Kết quả của phép tính 16 : 2 bằng:</p>
+    <div class="options" data-type="mc" data-correct="a">
+      <label class="opt"><input type="radio" name="c3" value="a"> A. 8</label>
+      <label class="opt"><input type="radio" name="c3" value="b"> B. 9</label>
+      <label class="opt"><input type="radio" name="c3" value="c"> C. 4</label>
+      <label class="opt"><input type="radio" name="c3" value="d"> D. 14</label>
+    </div>
+    <div class="feedback" data-explain="16 : 2 = 8."></div>
+  </div>
+
+  <div class="q-card" data-qid="c4">
+    <div class="q-top"><div class="q-num">4</div><span class="q-tag">Trắc nghiệm</span><span class="q-points">0,5 điểm</span></div>
+    <p class="q-text">Một cửa hàng buổi sáng bán được 124 kg gạo, buổi chiều bán được nhiều hơn buổi sáng 20 kg gạo. Hỏi cả ngày cửa hàng đó bán được bao nhiêu ki-lô-gam gạo?</p>
+    <div class="options" data-type="mc" data-correct="b">
+      <label class="opt"><input type="radio" name="c4" value="a"> A. 144 kg</label>
+      <label class="opt"><input type="radio" name="c4" value="b"> B. 268 kg</label>
+      <label class="opt"><input type="radio" name="c4" value="c"> C. 184 kg</label>
+      <label class="opt"><input type="radio" name="c4" value="d"> D. 286 kg</label>
+    </div>
+    <div class="feedback" data-explain="Buổi chiều bán: 124 + 20 = 144 kg. Cả ngày: 124 + 144 = 268 kg."></div>
+  </div>
+
+  <div style="text-align:center;"><span class="hero-badge" style="border-color:var(--purple-deep);color:var(--purple-deep);">PHẦN 2 · TRẮC NGHIỆM ĐÚNG - SAI (1 điểm)</span></div>
+
+  <div class="q-card" data-qid="c5">
+    <div class="q-top"><div class="q-num">5</div><span class="q-tag">Đúng / Sai</span><span class="q-points">1,0 điểm</span></div>
+    <p class="q-text">Trong một túi có 30 viên bi gồm: 12 viên bi màu xanh, 10 viên bi màu đỏ, 8 viên bi màu vàng. Minh lấy ngẫu nhiên 1 viên bi từ trong túi.</p>
+    <div class="tf-row" data-correct="dung"><div class="tf-text">a) Minh có thể lấy được một viên bi màu xanh.</div><div class="tf-btns"><button type="button" class="tf-btn" data-val="dung">Đúng</button><button type="button" class="tf-btn" data-val="sai">Sai</button></div></div>
+    <div class="tf-row" data-correct="sai"><div class="tf-text">b) Minh lấy được một viên bi màu đỏ là điều chắc chắn.</div><div class="tf-btns"><button type="button" class="tf-btn" data-val="dung">Đúng</button><button type="button" class="tf-btn" data-val="sai">Sai</button></div></div>
+    <div class="tf-row" data-correct="dung"><div class="tf-text">c) Minh lấy được một viên bi màu trắng là điều không thể xảy ra.</div><div class="tf-btns"><button type="button" class="tf-btn" data-val="dung">Đúng</button><button type="button" class="tf-btn" data-val="sai">Sai</button></div></div>
+    <div class="tf-row" data-correct="dung"><div class="tf-text">d) Minh có thể lấy được một viên bi màu vàng.</div><div class="tf-btns"><button type="button" class="tf-btn" data-val="dung">Đúng</button><button type="button" class="tf-btn" data-val="sai">Sai</button></div></div>
+    <div class="feedback" data-explain="a) ĐÚNG (có bi xanh trong túi). b) SAI (không chắc chắn vì còn có bi màu khác). c) ĐÚNG (không có bi trắng trong túi). d) ĐÚNG (có bi vàng trong túi)."></div>
+  </div>
+
+  <div style="text-align:center;"><span class="hero-badge" style="border-color:var(--purple-deep);color:var(--purple-deep);">PHẦN 3 · ĐIỀN ĐÁP ÁN (1 điểm)</span></div>
+
+  <div class="q-card" data-qid="c6">
+    <div class="q-top"><div class="q-num">6</div><span class="q-tag tag-fill">Điền đáp án</span><span class="q-points">0,5 điểm</span></div>
+    <p class="q-text">Biểu đồ tranh: CÁC VỊ KEM MÀ CÁC BẠN LỚP 3A YÊU THÍCH</p>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:16px;font-weight:600;font-size:14px;">
+      <tr><td style="padding:8px;border:1px solid #d3e3ff;width:110px;">Kem vani</td><td style="padding:8px;border:1px solid #d3e3ff;">🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦🍦 <span style="color:#999;font-size:12px;">(11)</span></td></tr>
+      <tr><td style="padding:8px;border:1px solid #d3e3ff;">Kem sô-cô-la</td><td style="padding:8px;border:1px solid #d3e3ff;">🍫🍫🍫🍫🍫🍫🍫🍫🍫 <span style="color:#999;font-size:12px;">(9)</span></td></tr>
+      <tr><td style="padding:8px;border:1px solid #d3e3ff;">Kem dâu</td><td style="padding:8px;border:1px solid #d3e3ff;">🍓🍓🍓🍓🍓 <span style="color:#999;font-size:12px;">(5)</span></td></tr>
+      <tr><td style="padding:8px;border:1px solid #d3e3ff;">Kem bạc hà</td><td style="padding:8px;border:1px solid #d3e3ff;">🍧🍧🍧🍧 <span style="color:#999;font-size:12px;">(4)</span></td></tr>
+    </table>
+    <div class="fill-line"><span>a) Có tất cả bao nhiêu học sinh tham gia khảo sát?</span><input type="text" data-key="a1" data-answers="29"></div>
+    <div class="fill-line"><span>b) Số bạn thích kem vani nhiều hơn số bạn thích kem dâu:</span><input type="text" data-key="a2" data-answers="6"><span>bạn</span></div>
+    <div class="feedback" data-explain="a) Tổng: 11+9+5+4=29 học sinh. b) 11−5=6 bạn."></div>
+  </div>
+
+  <div class="q-card" data-qid="c7">
+    <div class="q-top"><div class="q-num">7</div><span class="q-tag tag-fill">Điền đáp án</span><span class="q-points">0,5 điểm</span></div>
+    <p class="q-text">Hình dưới đây có bao nhiêu đoạn thẳng?</p>
+    <div class="illus-inline" aria-hidden="true">
+      <svg viewBox="0 0 200 160" style="width:170px;height:135px;">
+        <polygon points="100,10 40,70 160,70" fill="none" stroke="#26324a" stroke-width="3"/>
+        <rect x="40" y="70" width="120" height="80" fill="none" stroke="#26324a" stroke-width="3"/>
+        <line x1="40" y1="70" x2="160" y2="150" stroke="#26324a" stroke-width="2.5"/>
+        <line x1="160" y1="70" x2="40" y2="150" stroke="#26324a" stroke-width="2.5"/>
+        <circle cx="100" cy="10" r="4" fill="#e35b4d"/><circle cx="40" cy="70" r="4" fill="#e35b4d"/><circle cx="160" cy="70" r="4" fill="#e35b4d"/>
+        <circle cx="100" cy="110" r="4" fill="#e35b4d"/><circle cx="40" cy="150" r="4" fill="#e35b4d"/><circle cx="160" cy="150" r="4" fill="#e35b4d"/>
+      </svg>
+    </div>
+    <div class="fill-line"><span>Trả lời:</span><input type="text" data-key="a3" data-answers="8"><span>đoạn thẳng</span></div>
+    <div class="feedback" data-explain="Gồm: 2 cạnh mái (đỉnh-trái, đỉnh-phải) + 4 cạnh hình chữ nhật (trên, dưới, trái, phải) + 2 đường chéo = 8 đoạn thẳng."></div>
+  </div>
+
+  <div style="text-align:center;"><span class="hero-badge" style="border-color:var(--purple-deep);color:var(--purple-deep);">PHẦN 4 · TỰ LUẬN (6 điểm)</span></div>
+
+  <div class="q-card" data-qid="b1">
+    <div class="q-top"><div class="q-num">B1</div><span class="q-tag tag-fill">Đặt tính rồi tính</span><span class="q-points">2,0 điểm</span></div>
+    <div class="calc-grid">
+      <div class="calc-row">232 + 39 = <input type="text" data-key="p1" data-answers="271"></div>
+      <div class="calc-row">576 + 189 = <input type="text" data-key="p2" data-answers="765"></div>
+      <div class="calc-row">195 − 69 = <input type="text" data-key="p3" data-answers="126"></div>
+      <div class="calc-row">719 − 271 = <input type="text" data-key="p4" data-answers="448"></div>
+    </div>
+    <div class="feedback" data-explain="232+39=271 · 576+189=765 · 195−69=126 · 719−271=448."></div>
+  </div>
+
+  <div class="q-card" data-qid="b2">
+    <div class="q-top"><div class="q-num">B2</div><span class="q-tag tag-fill">Tự luận</span><span class="q-points">1,5 điểm</span></div>
+    <p class="q-text">Ông Sáu có một đoạn dây đồng. Ông Sáu nối các sợi dây đồng đó thành hình ngôi sao (5 cánh, 10 cạnh bằng nhau). Biết mỗi cạnh của ngôi sao đó dài 2 dm. Hỏi đoạn dây đồng của ông Sáu dài bao nhiêu xăng-ti-mét?</p>
+    <div class="illus-inline" aria-hidden="true">
+      <svg viewBox="0 0 100 100" style="width:90px;height:90px;">
+        <polygon points="50,5 61,35 95,35 68,55 78,88 50,68 22,88 32,55 5,35 39,35" fill="none" stroke="#26324a" stroke-width="3"/>
+      </svg>
+    </div>
+    <div class="fill-line"><span>Đáp số:</span><input type="text" data-key="p5" data-answers="200"><span>cm</span></div>
+    <div class="feedback" data-explain="Ngôi sao 5 cánh có 10 cạnh bằng nhau. Độ dài dây: 10 × 2dm = 20dm = 200cm."></div>
+  </div>
+
+  <div class="q-card" data-qid="b3">
+    <div class="q-top"><div class="q-num">B3</div><span class="q-tag tag-fill">Tự luận</span><span class="q-points">1,0 điểm</span></div>
+    <p class="q-text">Tìm một số biết rằng nếu lấy số đó cộng với 345, rồi cộng với số bé nhất có ba chữ số sẽ được kết quả là số lớn nhất có ba chữ số khác nhau?</p>
+    <div class="fill-line"><span>Đáp số:</span><input type="text" data-key="p6" data-answers="542"></div>
+    <div class="feedback" data-explain="Số bé nhất có 3 chữ số = 100. Số lớn nhất có 3 chữ số khác nhau = 987. Vậy: x + 345 + 100 = 987 → x = 987 − 445 = 542."></div>
+  </div>
+
+  <div class="q-card" data-qid="b4">
+    <div class="q-top"><div class="q-num">B4</div><span class="q-tag tag-fill">Suy luận</span><span class="q-points">1,5 điểm</span></div>
+    <p class="q-text">Ba bạn An, Bình, Chi đứng thành một hàng. Bình không đứng đầu hàng. Chi đứng sau Bình. Hỏi ai đứng đầu hàng?</p>
+    <div class="fill-line"><span>Đáp số:</span><input type="text" data-key="p7" data-textanswers="an|bạn an"></div>
+    <div class="feedback" data-explain="Vì Bình không đứng đầu và Chi đứng sau Bình, nên thứ tự là: An - Bình - Chi. Vậy An đứng đầu hàng."></div>
+  </div>
+
+</div>
+
+<div class="wrap">
+  <div class="submit-zone">
+    <button class="btn-submit" id="submitBtn">🎉 Nộp bài</button>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-emoji" id="resultEmoji">🏆</div>
+    <div class="result-score" id="resultScore">0 / 20 điểm</div>
+    <div class="result-msg" id="resultMsg">Cố gắng lên nhé!</div>
+    <button class="btn-retry" id="retryBtn">↺ Làm lại</button>
+  </div>
+</div>
+
+<footer>Đề khảo sát Lớp 3 — Đề 1 · Chúc em làm bài tốt! 🧮</footer>
+
+<script>
+const qCards = Array.from(document.querySelectorAll('.q-card'));
+const totalGroups = qCards.length;
+
+function normNum(s){ return (s||'').toString().trim().replace(/[.\s]/g,'').replace(',', '.'); }
+function normList(s){ return (s||'').toString().split(/[,;]+/).map(x=>x.replace(/[^\d]/g,'').trim()).filter(x=>x!==''); }
+function normText(s){ return (s||'').toString().trim().toLowerCase().replace(/[.,!?;:"']/g,'').replace(/\s+/g,' '); }
+
+function updateProgress(){
+  let answered = 0;
+  qCards.forEach(card=>{ if(isGroupTouched(card)) answered++; });
+  const pct = Math.round((answered/totalGroups)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-walker').style.left = pct+'%';
+  document.getElementById('progress-count').textContent = answered+' / '+totalGroups+' bài';
+}
+
+function isGroupTouched(card){
+  const inputs = card.querySelectorAll('input[type=text]');
+  if(Array.from(inputs).some(i=>i.value.trim()!=='')) return true;
+  const choices = card.querySelectorAll('.choice-row[data-type="choice"]');
+  if(choices.length){ if(Array.from(card.querySelectorAll('.choice-btn')).some(b=>b.classList.contains('picked'))) return true; }
+  const mc = card.querySelector('.options[data-type="mc"]');
+  if(mc){ if(mc.querySelector('input:checked')) return true; }
+  const tfRows = card.querySelectorAll('.tf-row');
+  if(tfRows.length){ if(Array.from(card.querySelectorAll('.tf-btn')).some(b=>b.classList.contains('picked'))) return true; }
+  const match = card.querySelector('.match-group[data-type="match"]');
+  if(match){ if(Array.from(match.querySelectorAll('select')).some(s=>s.value!=='')) return true; }
+  return false;
+}
+
+qCards.forEach(card=>{
+  card.addEventListener('input', updateProgress);
+  card.addEventListener('change', updateProgress);
+  card.querySelectorAll('.choice-row[data-type="choice"]').forEach(row=>{
+    row.querySelectorAll('.choice-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        row.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+        updateProgress();
+      });
+    });
+  });
+  card.querySelectorAll('.options[data-type="mc"] .opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      const input = opt.querySelector('input');
+      if(input){ input.checked = true; }
+      card.querySelectorAll('.options[data-type="mc"] .opt').forEach(o=>o.classList.remove('picked'));
+      opt.classList.add('picked');
+      updateProgress();
+    });
+  });
+  card.querySelectorAll('.tf-row').forEach(row=>{
+    row.querySelectorAll('.tf-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        row.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+        updateProgress();
+      });
+    });
+  });
+});
+
+document.getElementById('submitBtn').addEventListener('click', ()=>{
+  const nameInput = document.getElementById('studentName');
+  if(nameInput.value.trim()===''){
+    nameInput.style.borderColor = 'var(--coral)';
+    nameInput.focus();
+    nameInput.placeholder = 'Em nhớ điền tên trước khi nộp bài nhé!';
+    return;
+  }
+  nameInput.style.borderColor = '#eaeff6';
+
+  let earned = 0, possible = 0;
+
+  qCards.forEach(card=>{
+    let groupCorrect = true;
+    let groupTouched = isGroupTouched(card);
+
+    // set-type answers (Bài 1a - không cần đúng thứ tự)
+    const handledKeys = new Set();
+    const setInputs = card.querySelectorAll('input[data-answerset]');
+    setInputs.forEach(inp=>{
+      handledKeys.add(inp.getAttribute('data-key'));
+      possible += 1;
+      const expected = inp.getAttribute('data-answerset').split(',').map(x=>x.trim()).sort();
+      const given = normList(inp.value).slice().sort();
+      const ok = expected.length===given.length && expected.every((v,i)=>v===given[i]);
+      if(ok) earned += 1; else groupCorrect = false;
+      inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e35b4d');
+      inp.style.borderBottomColor = inp.value.trim()==='' ? '#c3cfe0' : (ok ? '#3fc17d' : '#ff7a6e');
+    });
+
+    // list-type answers (thứ tự)
+    const listInputs = card.querySelectorAll('input[data-answers*=","]');
+
+    Array.from(listInputs).forEach(inp=>{
+      handledKeys.add(inp.getAttribute('data-key'));
+      possible += 1;
+      const expected = inp.getAttribute('data-answers').split(',').map(x=>x.trim());
+      const given = normList(inp.value);
+      const ok = expected.length===given.length && expected.every((v,i)=>v===given[i]);
+      if(ok) earned += 1; else groupCorrect = false;
+      inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e35b4d');
+      inp.style.borderBottomColor = inp.value.trim()==='' ? '#c3cfe0' : (ok ? '#3fc17d' : '#ff7a6e');
+    });
+
+    // text-based answers (e.g. "Thứ Ba")
+    const textInputs = card.querySelectorAll('input[type=text][data-textanswers]');
+    textInputs.forEach(inp=>{
+      handledKeys.add(inp.getAttribute('data-key'));
+      possible += 1;
+      const expected = inp.getAttribute('data-textanswers').split('|').map(normText);
+      const ok = expected.includes(normText(inp.value));
+      if(ok) earned += 1; else groupCorrect = false;
+      inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e35b4d');
+      inp.style.borderBottomColor = inp.value.trim()==='' ? '#c3cfe0' : (ok ? '#3fc17d' : '#ff7a6e');
+    });
+
+    // plain numeric fill inputs
+    const numInputs = card.querySelectorAll('input[type=text][data-answers]:not([data-answers*=","])');
+    numInputs.forEach(inp=>{
+      if(handledKeys.has(inp.getAttribute('data-key'))) return;
+      possible += 1;
+      const expected = normNum(inp.getAttribute('data-answers'));
+      const given = normNum(inp.value);
+      const ok = given!=='' && given === expected;
+      if(ok) earned += 1; else groupCorrect = false;
+      inp.style.color = inp.value.trim()==='' ? '#c8ceda' : (ok ? '#1d7a52' : '#e35b4d');
+      inp.style.borderBottomColor = inp.value.trim()==='' ? '#c3cfe0' : (ok ? '#3fc17d' : '#ff7a6e');
+    });
+
+    // choice buttons (>,<,=)
+    const choiceRows = card.querySelectorAll('.choice-row[data-type="choice"]');
+    choiceRows.forEach(row=>{
+      possible += 1;
+      const correctVal = row.getAttribute('data-correct');
+      const picked = row.querySelector('.choice-btn.picked');
+      const ok = picked && picked.getAttribute('data-val') === correctVal;
+      if(ok) earned += 1; else groupCorrect = false;
+      row.querySelectorAll('.choice-btn').forEach(b=>{
+        if(b.getAttribute('data-val')===correctVal) b.classList.add('correct-answer');
+      });
+    });
+
+    // multiple choice (trắc nghiệm A/B/C/D)
+    const mc = card.querySelector('.options[data-type="mc"]');
+    if(mc){
+      possible += 1;
+      const checked = mc.querySelector('input:checked');
+      const correctVal = mc.getAttribute('data-correct');
+      const isCorrect = checked && checked.value === correctVal;
+      if(isCorrect) earned += 1; else groupCorrect = false;
+      mc.querySelectorAll('.opt').forEach(o=>{
+        const input = o.querySelector('input');
+        if(input.value === correctVal) o.classList.add('correct-answer');
+      });
+    }
+
+    // Đúng / Sai
+    const tfRows = card.querySelectorAll('.tf-row');
+    tfRows.forEach(row=>{
+      possible += 1;
+      const correctVal = row.getAttribute('data-correct');
+      const picked = row.querySelector('.tf-btn.picked');
+      const ok = picked && picked.getAttribute('data-val') === correctVal;
+      if(ok) earned += 1; else groupCorrect = false;
+      row.classList.remove('correct','incorrect');
+      if(picked){ row.classList.add(ok ? 'correct' : 'incorrect'); }
+      row.querySelectorAll('.tf-btn').forEach(b=>{
+        if(b.getAttribute('data-val')===correctVal) b.classList.add('correct-answer');
+      });
+    });
+
+    // nối câu (dropdown match)
+    const match = card.querySelector('.match-group[data-type="match"]');
+    if(match){
+      const rows = Array.from(match.querySelectorAll('.match-row'));
+      possible += rows.length;
+      rows.forEach(row=>{
+        const sel = row.querySelector('select');
+        const correctVal = row.getAttribute('data-correct');
+        const ok = sel.value === correctVal;
+        if(ok) earned += 1; else groupCorrect = false;
+        sel.style.borderColor = sel.value ? (ok ? '#3fc17d' : '#ff7a6e') : '#e2edff';
+      });
+    }
+
+    card.classList.remove('correct','incorrect');
+    if(groupTouched){ card.classList.add(groupCorrect ? 'correct' : 'incorrect'); }
+  });
+
+  updateProgress();
+
+  // Gửi kết quả về Google Sheet của giáo viên
+  try {
+    fetch("https://script.google.com/macros/s/AKfycbyvWKGiEadJZC0m2E_ETWm1oGUXTJ7RaNEGJkDT_TiX5UGxaav75rKJ0mN2OV-hQ4s/exec", {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify({
+        bai: "Khảo sát Lớp 3 - Đề 1",
+        hoten: nameInput.value.trim(),
+        lop: document.getElementById('studentClass').value.trim(),
+        diem: earned,
+        tongdiem: possible
+      })
+    }).catch(()=>{});
+  } catch(e) {}
+
+  const pct = Math.round((earned/possible)*100);
+  const resultPanel = document.getElementById('resultPanel');
+  document.getElementById('resultScore').textContent = earned+' / '+possible+' điểm';
+  let emoji, msg;
+  if(pct >= 90){ emoji='🏆'; msg='xuất sắc, sẵn sàng vào lớp 2 rồi!'; }
+  else if(pct >= 70){ emoji='🌟'; msg='làm rất tốt, cố thêm chút nữa nhé!'; }
+  else if(pct >= 50){ emoji='🙂'; msg='khá lắm, xem lại vài bài để giỏi hơn nữa nhé.'; }
+  else { emoji='📘'; msg='đừng lo, hãy ôn lại và thử lần nữa nhé!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMsg').textContent = nameInput.value.trim()+' ơi, '+msg;
+  resultPanel.classList.add('show');
+  resultPanel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('retryBtn').addEventListener('click', ()=>{
+  document.getElementById('studentName').value='';
+  document.getElementById('studentName').style.borderColor='#eaeff6';
+  document.getElementById('studentName').placeholder='Nhập họ và tên của em...';
+  document.getElementById('studentClass').value='';
+  document.querySelectorAll('input[type=text]').forEach(i=>{ if(i.id!=='studentName' && i.id!=='studentClass'){ i.value=''; i.style.color=''; i.style.borderBottomColor=''; } });
+  document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('picked','correct-answer'));
+  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  document.querySelectorAll('.options[data-type="mc"] .opt').forEach(o=>o.classList.remove('picked','correct-answer'));
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('picked','correct-answer'));
+  document.querySelectorAll('.tf-row').forEach(r=>r.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.match-group select').forEach(s=>{s.value='';s.style.borderColor='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('correct','incorrect'));
+  document.getElementById('resultPanel').classList.remove('show');
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+updateProgress();
+</script>
+</body>
+</html>
