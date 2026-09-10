@@ -146,6 +146,7 @@
   <div class="info-two">
     <div class="info-row"><label>🏫 Lớp</label><input type="text" id="studentClass" placeholder="VD: 4A"></div>
   </div>
+  <div class="info-row"><label>📱 PHHS cung cấp số điện thoại để được nhận kết quả đánh giá:</label><input type="tel" id="parentPhone" placeholder="VD: 0912345678"></div>
 </div>
 
 <div class="progress-wrap">
@@ -580,6 +581,7 @@ document.getElementById('submitBtn').addEventListener('click', ()=>{
         bai: "Đề khảo sát - Lớp 2",
         hoten: nameInput.value.trim(),
         lop: document.getElementById('studentClass').value.trim(),
+        sdt: document.getElementById('parentPhone').value.trim(),
         diem: earned,
         tongdiem: possible
       })
@@ -605,6 +607,9 @@ document.getElementById('retryBtn').addEventListener('click', ()=>{
   document.getElementById('studentName').style.borderColor='#eaeff6';
   document.getElementById('studentName').placeholder='Nhập họ và tên của em...';
   document.getElementById('studentClass').value='';
+  document.getElementById('parentPhone').value='';
+  document.getElementById('parentPhone').style.borderColor='#eaeff6';
+  document.getElementById('parentPhone').placeholder='VD: 0912345678';
   document.querySelectorAll('input[type=text]').forEach(i=>{ if(i.id!=='studentName' && i.id!=='studentClass'){ i.value=''; i.style.color=''; i.style.borderBottomColor=''; } });
   document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('picked','correct-answer'));
   document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
